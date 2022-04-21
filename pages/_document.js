@@ -7,7 +7,7 @@ class MyDocument extends Document {
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=optional" rel="stylesheet"></link>
         </Head>
-        <body>
+        <body className='bg-background'>
           <Main />
           <NextScript />
         </body>
