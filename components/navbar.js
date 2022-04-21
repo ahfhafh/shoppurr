@@ -40,6 +40,8 @@ const Navbar = (props) => {
         <nav>
             <div className="h-24 pt-2 md:px-12 md:pt-0 bg-background md:flex md:justify-between md:items-center">
                 <div className="text-center">
+                    <Link href='/'>
+                        <a>
                     <Image
                         src={logo}
                         alt='logo'
@@ -47,6 +49,8 @@ const Navbar = (props) => {
                         height='64px'
                     />
                     <h1 className="font-indie text-accent text-5xl ml-2 inline-block md:grow">Shop purr</h1>
+                        </a>
+                    </Link>
                 </div>
                 {!useMediaQuery(MOBILE_WINDOW) && <NavbarDesktopLinks cartItems={1} />}
             </div>
