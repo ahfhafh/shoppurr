@@ -1,12 +1,12 @@
-import Link from "next/link";
+import NavSlide from "./navbarMobileSlide";
+import Link from 'next/link';
 import Image from "next/image";
 import logo from "../public/images/logo-dark.svg"
 import { useEffect, useState, useCallback } from "react";
 import NavbarDesktopLinks from "./navbarDesktopLinks";
 import NavbarMobileLinks from "./navbarMobileLinks";
 
-
-const Navbar = (props) => {
+const Navbar = () => {
 
     const MOBILE_WINDOW = 768;
 
@@ -36,28 +36,29 @@ const Navbar = (props) => {
 
         return targetReached;
     };
-    
+
     const [toggleSlideNav, setToggleSlideNav] = useState(false);
 
     return (
         <nav>
-            <div className="h-24 pt-2 md:px-12 md:pt-0 bg-background md:flex md:justify-between md:items-center">
+            <div className="h-24 pt-2 md:px-12 md:pt-0 bg-background2 md:flex md:justify-between md:items-center">
                 <div className="text-center">
                     <Link href='/'>
                         <a>
-                    <Image
-                        src={logo}
-                        alt='logo'
-                        width='64px'
-                        height='64px'
-                    />
-                    <h1 className="font-indie text-accent text-5xl ml-2 inline-block md:grow">Shop purr</h1>
+                            <Image
+                                src={logo}
+                                alt='Shop purr logo'
+                                width='64px'
+                                height='64px'
+                            />
+                            <h1 className="font-indie text-accent text-5xl ml-2 inline-block md:grow">Shop purr</h1>
                         </a>
                     </Link>
                 </div>
                 {!useMediaQuery(MOBILE_WINDOW) && <NavbarDesktopLinks cartItems={1} />}
             </div>
-            {useMediaQuery(MOBILE_WINDOW) && <NavbarMobileLinks cartItems={1} />}
+            {useMediaQuery(MOBILE_WINDOW) && <NavbarMobileLinks cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} />}
+            {toggleSlideNav && <NavSlide />}
         </nav>
     );
 }
