@@ -1,10 +1,11 @@
 import NavSlide from "./navbarMobileSlide";
+import NavbarDesktopLinks from "./navbarDesktopLinks";
+import NavbarMobileLinks from "./navbarMobileLinks";
 import Link from 'next/link';
 import Image from "next/image";
 import logo from "../public/images/logo-dark.svg"
 import { useEffect, useState, useCallback } from "react";
-import NavbarDesktopLinks from "./navbarDesktopLinks";
-import NavbarMobileLinks from "./navbarMobileLinks";
+import { AnimatePresence } from "framer-motion"
 
 const Navbar = () => {
 
@@ -32,7 +33,7 @@ const Navbar = () => {
             }
 
             return () => media.removeEventListener('change', e => updateTarget(e))
-        }, [])
+        }, [width, updateTarget])
 
         return targetReached;
     };
@@ -57,8 +58,10 @@ const Navbar = () => {
                 </div>
                 {!useMediaQuery(MOBILE_WINDOW) && <NavbarDesktopLinks cartItems={1} />}
             </div>
-            {useMediaQuery(MOBILE_WINDOW) && <NavbarMobileLinks cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} />}
-            {toggleSlideNav && <NavSlide />}
+            {useMediaQuery(MOBILE_WINDOW) && <NavbarMobileLinks cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} />}
+            <AnimatePresence exitBeforeEnter>
+                {toggleSlideNav && <NavSlide />}
+            </AnimatePresence>
         </nav>
     );
 }
