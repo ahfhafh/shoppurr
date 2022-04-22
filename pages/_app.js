@@ -51,3 +51,4 @@ export default MyApp
 
     // TODO: navbar: close slide after clicking link
     // TODO: navbar: close slide after mobile -> desktop
+    // TODO: navbar: box shadow
