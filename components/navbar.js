@@ -11,7 +11,7 @@ const Navbar = (props) => {
     const [toggleSlideNav, setToggleSlideNav] = useState(false);
 
     useEffect(() => {
-        (props.useMediaQuery && setToggleSlideNav(false));
+        (!props.useMediaQuery && setToggleSlideNav(false));
     },[props.useMediaQuery])
 
     return (
