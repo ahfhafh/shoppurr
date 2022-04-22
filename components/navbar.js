@@ -4,41 +4,15 @@ import NavbarMobileLinks from "./navbarMobileLinks";
 import Link from 'next/link';
 import Image from "next/image";
 import logo from "../public/images/logo-dark.svg"
-import { useEffect, useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion"
 
-const Navbar = () => {
-
-    const MOBILE_WINDOW = 768;
-
-    const useMediaQuery = (width) => {
-        const [targetReached, setTargetReached] = useState(false);
-
-        const updateTarget = useCallback((e) => {
-            if (e.matches) {
-                setTargetReached(true);
-            } else {
-                setTargetReached(false);
-                setToggleSlideNav(false);
-            }
-        }, []);
-
-        useEffect(() => {
-            const media = window.matchMedia(`(max-width: ${width}px)`)
-            media.addEventListener('change', e => updateTarget(e))
-
-            // Check on mount (callback is not called until a change occurs)
-            if (media.matches) {
-                setTargetReached(true)
-            }
-
-            return () => media.removeEventListener('change', e => updateTarget(e))
-        }, [width, updateTarget])
-
-        return targetReached;
-    };
-
+const Navbar = (props) => {
     const [toggleSlideNav, setToggleSlideNav] = useState(false);
+
+    useEffect(() => {
+        (props.useMediaQuery && setToggleSlideNav(false));
+    },[props.useMediaQuery])
 
     return (
         <nav>
@@ -56,9 +30,9 @@ const Navbar = () => {
                         </a>
                     </Link>
                 </div>
-                {!useMediaQuery(MOBILE_WINDOW) && <NavbarDesktopLinks cartItems={1} />}
+                {!props.useMediaQuery && <NavbarDesktopLinks cartItems={1} setToggleCart={() => props.setToggleCart()} />}
             </div>
-            {useMediaQuery(MOBILE_WINDOW) && <NavbarMobileLinks cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} />}
+            {props.useMediaQuery && <NavbarMobileLinks cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} setToggleCart={() => props.setToggleCart()}/>}
             <AnimatePresence exitBeforeEnter>
                 {toggleSlideNav && <NavSlide />}
             </AnimatePresence>
