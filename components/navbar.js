@@ -18,6 +18,7 @@ const Navbar = (props) => {
                 setTargetReached(true);
             } else {
                 setTargetReached(false);
+                setToggleSlideNav(false);
             }
         }, []);
 
@@ -35,6 +36,8 @@ const Navbar = (props) => {
 
         return targetReached;
     };
+    
+    const [toggleSlideNav, setToggleSlideNav] = useState(false);
 
     return (
         <nav>
