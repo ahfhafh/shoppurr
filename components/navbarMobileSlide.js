@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Link from 'next/link';
 
-const NavSlide = (props) => {
+const NavSlide = () => {
     return (
         <motion.div className="border-solid border-2 border-text w-10/12 ml-9 fixed bottom-24">
             <ul className="text-center py-2">
