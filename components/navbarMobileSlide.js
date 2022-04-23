@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 const NavSlide = () => {
     return (
         <motion.div
-            className="bg-accent w-10/12 left-1/2 -translate-x-1/2 h-0 fixed"
-            style={{'bottom': '95px'}}
+            className="bg-accent w-10/12 left-1/2 -translate-x-1/2 h-0 fixed bottom-[95px]"
             key="navSlide" animate={{ height: "auto" }}
             transition={{ duration: .2, type: "tween", ease: "easeOut" }}
             exit={{ height: 0 }}
