@@ -1,11 +1,10 @@
 
-import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { useState } from 'react';
 
-const NavbarMobileLinks = (props) => {
+const NavbarMobileMenu = (props) => {
     const [hideCartBtn, setHideCartBtn] = useState(false);
 
     const cartBtnVariants = {
@@ -63,4 +62,4 @@ const NavbarMobileLinks = (props) => {
     );
 }
 
-export default NavbarMobileLinks;
+export default NavbarMobileMenu;
