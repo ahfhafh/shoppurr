@@ -12,7 +12,7 @@ const Navbar = (props) => {
 
     useEffect(() => {
         (!props.useMediaQuery && setToggleSlideNav(false));
-    },[props.useMediaQuery])
+    }, [props.useMediaQuery])
 
     return (
         <nav>
@@ -32,7 +32,7 @@ const Navbar = (props) => {
                 </div>
                 {!props.useMediaQuery && <NavbarDesktopLinks cartItems={1} setToggleCart={() => props.setToggleCart()} />}
             </div>
-            {props.useMediaQuery && <NavbarMobileMenu cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} setToggleCart={() => props.setToggleCart()}/>}
+            {props.useMediaQuery && <NavbarMobileMenu cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} setToggleCart={() => props.setToggleCart()} />}
             <AnimatePresence exitBeforeEnter>
                 {toggleSlideNav && <NavSlide />}
             </AnimatePresence>

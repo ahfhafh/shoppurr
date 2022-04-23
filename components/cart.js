@@ -20,8 +20,8 @@ const Cart = (props) => {
 
     return (<div>
         {props.toggleCart && (props.useMediaQuery
-            ? <CartMobile cartItems={cartItems} />
-            : <CartDesktop cartItems={cartItems} />)
+            ? <CartMobile cartItems={cartItems} setToggleCart={() => props.setToggleCart()} />
+            : <CartDesktop cartItems={cartItems} setToggleCart={() => props.setToggleCart()} />)
         }
     </div>);
 }

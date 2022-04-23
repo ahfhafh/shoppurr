@@ -38,10 +38,18 @@ function MyApp({ Component, pageProps }) {
 
   const [toggleCart, setToggleCart] = useState(false);
 
+  useEffect(() => {
+    if (toggleCart) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [toggleCart]);
+
   return (
     <>
       <div style={{ 'minHeight': 'calc(100vh - 200px)' }}>
-        <Cart useMediaQuery={useMediaQuery(MOBILE_WINDOW)} toggleCart={toggleCart} />
+        <Cart useMediaQuery={useMediaQuery(MOBILE_WINDOW)} toggleCart={toggleCart} setToggleCart={() => setToggleCart(!toggleCart)} />
         <Navbar useMediaQuery={useMediaQuery(MOBILE_WINDOW)} setToggleCart={() => setToggleCart(!toggleCart)} />
         <Component {...pageProps} />
       </div>
@@ -58,3 +66,4 @@ export default MyApp
     // TODO: navbar: box shadow
     // TODO: navbar: mobile slide remove cart btn when empty
     // IMPLEMENT: navbar: show/hide on scroll
+    // IMPLEMENT: second font
