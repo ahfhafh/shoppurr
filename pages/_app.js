@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <div style={{ 'minHeight': 'calc(100vh - 88px)' }}>
+      <div style={{ 'minHeight': 'calc(100vh - 200px)' }}>
         <Cart useMediaQuery={useMediaQuery(MOBILE_WINDOW)} toggleCart={toggleCart} />
         <Navbar useMediaQuery={useMediaQuery(MOBILE_WINDOW)} setToggleCart={() => setToggleCart(!toggleCart)} />
         <Component {...pageProps} />
