@@ -41,7 +41,7 @@ const NavbarMobileLinks = (props) => {
 
     return (
         <div className="flex w-10/12 left-1/2 -translate-x-1/2 h-16 fixed bottom-8">
-            <button className="grow bg-background2 font-indie text-3xl" onClick={() => { props.toggleSlideNav(); setHideCartBtn(!hideCartBtn) }}>{props.toggleState ? <>X</> : 'MENU'}</button>
+            <button className="grow bg-accent text-background2 font-indie text-3xl" onClick={() => { props.toggleSlideNav(); setHideCartBtn(!hideCartBtn) }}>{props.toggleState ? <>X</> : 'MENU'}</button>
             <motion.button 
                 className={`w-16 pl-4 bg-accent2`} 
                 key="cartBtn" 
