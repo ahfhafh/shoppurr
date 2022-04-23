@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const CartMobile = (props) => {
 
@@ -10,8 +11,21 @@ const CartMobile = (props) => {
     }
 
     return (
-        <div className="bg-background2 bg-opacity-50 backdrop-blur-sm z-10 w-full h-full absolute" onClick={closeModal} ref={modalRef}>
-            <div className="w-full bg-background2 shadow-2xl absolute bottom-0 pt-20 flex flex-col max-h-screen items-center">
+        <motion.div className="z-10 w-full h-full absolute"
+            onClick={closeModal}
+            ref={modalRef}
+            key="modalBackM"
+            animate={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', backdropFilter: "blur(4px)" }}
+            exit={{ backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: "blur(0px)" }}
+            transition={{ duration: 0.5 }}
+        >
+            <motion.div className="w-full bg-background2 shadow-2xl absolute pt-20 flex flex-col max-h-screen items-center"
+                key='modalM'
+                initial={{ bottom: '-100vh' }}
+                animate={{ bottom: 0 }}
+                exit={{ bottom: '-100vh' }}
+                transition={{ bounce: 0 }}
+            >
                 <button className="absolute right-8 top-8" onClick={() => props.setToggleCart()}>X</button>
                 <ul className="text-center py-2 w-full overflow-y-auto">
                     {props.cartItems.map((item, i) => {
@@ -22,8 +36,8 @@ const CartMobile = (props) => {
                 <Link href='/'>
                     <a className="bg-accent text-background2 text-center text-xl w-10/12 mt-4 rounded-lg p-3 mb-8" onClick={() => props.setToggleCart()}>Checkout</a>
                 </Link>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 }
 

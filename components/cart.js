@@ -1,6 +1,7 @@
 import CartDesktop from "./cartDesktop";
 import CartMobile from "./cartMobile";
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion"
 
 const Cart = (props) => {
     // const [cartItems, setCartItems] = useState([]);
@@ -19,10 +20,10 @@ const Cart = (props) => {
     ]
 
     return (<div>
-        {props.toggleCart && (props.useMediaQuery
+        <AnimatePresence exitBeforeEnter>{props.toggleCart && (props.useMediaQuery
             ? <CartMobile cartItems={cartItems} setToggleCart={() => props.setToggleCart()} />
             : <CartDesktop cartItems={cartItems} setToggleCart={() => props.setToggleCart()} />)
-        }
+        }</AnimatePresence>
     </div>);
 }
 
