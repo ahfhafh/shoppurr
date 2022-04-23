@@ -1,6 +1,6 @@
 import NavSlide from "./navbarMobileSlide";
 import NavbarDesktopLinks from "./navbarDesktopLinks";
-import NavbarMobileLinks from "./navbarMobileLinks";
+import NavbarMobileMenu from "./navbarMobileMenu";
 import Link from 'next/link';
 import Image from "next/image";
 import logo from "../public/images/logo-dark.svg"
@@ -32,7 +32,7 @@ const Navbar = (props) => {
                 </div>
                 {!props.useMediaQuery && <NavbarDesktopLinks cartItems={1} setToggleCart={() => props.setToggleCart()} />}
             </div>
-            {props.useMediaQuery && <NavbarMobileLinks cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} setToggleCart={() => props.setToggleCart()}/>}
+            {props.useMediaQuery && <NavbarMobileMenu cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} setToggleCart={() => props.setToggleCart()}/>}
             <AnimatePresence exitBeforeEnter>
                 {toggleSlideNav && <NavSlide />}
             </AnimatePresence>
