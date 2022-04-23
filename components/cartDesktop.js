@@ -17,15 +17,6 @@ const CartDesktop = (props) => {
                     {props.cartItems.map((item, i) => {
                         return (<li key={i} className='my-2' >{item.name} {item.price} {item.quanty}</li>)
                     })}
-                    <li className="text-9xl">What</li>
-                    <li>What</li>
-                    <li>What</li>
-                    <li className="text-9xl">What</li>
-                    <li className="text-9xl">What</li>
-                    <li className="text-9xl">What</li>
-                    <li className="text-9xl">What</li>
-                    <li className="text-9xl">What</li>
-                    <li className="text-9xl">What</li>
                 </ul>
                 <p className="text-center mt-4">subtotal: </p>
                 <Link href='/'>
