@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <main>
+      <main className='break-all'>
         <div className='text-9xl'>PRODUCT</div>
         <div className='text-9xl'>PRODUCT</div>
         <div className='text-9xl'>PRODUCT</div>
