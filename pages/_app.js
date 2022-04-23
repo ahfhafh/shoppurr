@@ -4,6 +4,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import Navbar from '../components/navbar'
 import { useEffect, useState, useCallback } from "react";
 import Cart from '../components/cart';
+import Footer from '../components/footer';
 config.autoAddCss = false
 
 function MyApp({ Component, pageProps }) {
@@ -39,10 +40,14 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Cart useMediaQuery={useMediaQuery(MOBILE_WINDOW)} toggleCart={toggleCart} />
-      <Navbar useMediaQuery={useMediaQuery(MOBILE_WINDOW)} setToggleCart={() => setToggleCart(!toggleCart)} />
-      <Component {...pageProps} />
+      <div style={{ 'minHeight': 'calc(100vh - 88px)' }}>
+        <Cart useMediaQuery={useMediaQuery(MOBILE_WINDOW)} toggleCart={toggleCart} />
+        <Navbar useMediaQuery={useMediaQuery(MOBILE_WINDOW)} setToggleCart={() => setToggleCart(!toggleCart)} />
+        <Component {...pageProps} />
+      </div>
+      <Footer />
     </>
+
   )
 }
 
@@ -51,3 +56,5 @@ export default MyApp
 
     // TODO: navbar: close slide after clicking link
     // TODO: navbar: box shadow
+    // TODO: navbar: mobile slide remove cart btn when empty
+    // IMPLEMENT: navbar: show/hide on scroll
