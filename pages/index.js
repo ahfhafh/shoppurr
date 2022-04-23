@@ -12,12 +12,23 @@ export default function Home() {
       </Head>
       
       <main>
-        
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
+        <div className='text-9xl'>PRODUCT</div>
       </main>
-
-      <footer className='absolute text-center bottom-0 w-full'>
-          Powered by{' '}Nothing
-      </footer>
     </div>
   )
 }
