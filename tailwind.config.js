@@ -4,16 +4,16 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      'background': '#EFF0F3',
-      'background2': '#FFFFFE',
-      'text': '#0D0D0D',
-      'accent': '#ff8e3c',
-      'accent2': '#D9376E'
-    },
     extend: {
       fontFamily: {
         indie: ['"Indie Flower"', 'cursive'],
+      },
+      colors: {
+        'background': '#EFF0F3',
+        'background2': '#FFFFFE',
+        'text': '#0D0D0D',
+        'accent': '#ff8e3c',
+        'accent2': '#D9376E'
       },
     },
   },

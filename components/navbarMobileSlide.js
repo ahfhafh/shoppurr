@@ -17,7 +17,7 @@ const NavSlide = () => {
                 exit={{ opacity: 0 }}
             >
                 <li className="my-2">
-                    <Link href='/login'>
+                    <Link href='/account'>
                         <a className="text-xl">Login</a>
                     </Link>
                 </li>

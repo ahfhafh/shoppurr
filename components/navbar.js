@@ -3,7 +3,7 @@ import NavbarDesktopLinks from "./navbarDesktopLinks";
 import NavbarMobileMenu from "./navbarMobileMenu";
 import Link from 'next/link';
 import Image from "next/image";
-import logo from "../public/images/logo-dark.svg"
+import Logo from "../public/images/logo-dark.svg";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion"
 
@@ -17,16 +17,11 @@ const Navbar = (props) => {
     return (
         <nav>
             <div className="h-24 pt-2 md:px-12 md:pt-0 bg-background2 md:flex md:justify-between md:items-center">
-                <div className="text-center">
+                <div>
                     <Link href='/'>
-                        <a>
-                            <Image
-                                src={logo}
-                                alt='Shop purr logo'
-                                width='64px'
-                                height='64px'
-                            />
-                            <h1 className="font-indie text-accent text-5xl ml-2 inline-block md:grow">Shop purr</h1>
+                        <a className="flex justify-center items-end">
+                            <Logo className='shrink-0'/>
+                            <h1 className="font-indie text-accent text-5xl ml-2 mr-4 shrink-0 md:grow">Shop purr</h1>
                         </a>
                     </Link>
                 </div>

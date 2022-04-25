@@ -28,6 +28,7 @@ export default function Home() {
         <div className='text-9xl'>PRODUCT</div>
         <div className='text-9xl'>PRODUCT</div>
         <div className='text-9xl'>PRODUCT</div>
+        
       </main>
     </div>
   )
