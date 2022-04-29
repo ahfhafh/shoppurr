@@ -29,21 +29,21 @@ const NavSlide = () => {
                     </Link>
                 </li>
                 <li className="my-2">
-                    <Link href='/'>
+                    <Link href='/food'>
                         <a className="text-xl">
                             Food
                         </a>
                     </Link>
                 </li>
                 <li className="my-2">
-                    <Link href='/'>
+                    <Link href='/toys'>
                         <a className="text-xl">
                             Toys
                         </a>
                     </Link>
                 </li>
                 <li className="my-2">
-                    <Link href='/'>
+                    <Link href='/clothing'>
                         <a className="text-xl">
                             Clothing
                         </a>
