@@ -13,9 +13,14 @@ const env = {
   FIREBASE_MEASUREMENT_ID : 'G-LH3X7RZY57'
 }
 
+const images = {
+  domains: ['firebasestorage.googleapis.com'],
+}
+
 module.exports = {
   nextConfig,
   env,
+  images,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
