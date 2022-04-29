@@ -1,28 +1,44 @@
 import firebase from "../firebase/app";
+import { getAuth } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import signout from "./api/logout";
-import { useState } from "react";
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { useEffect } from "react";
+
+import 'firebaseui/dist/firebaseui.css'
 
 const Account = (props) => {
 
-    const auth = firebase.auth();
+    const auth = getAuth(firebase);
     const [user, loading, error] = useAuthState(auth);
 
-    const uiConfig = {
+    var uiConfig = {
         signInFlow: 'popup',
         signInSuccessUrl: '/',
         signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             firebase.auth.FacebookAuthProvider.PROVIDER_ID,
             firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
     };
 
+    useEffect(() => {
+        async function initFirebaseUI() {
+            // delay the import until window object is ready
+            const firebaseui = await import("firebaseui");
+            const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth);
+            if (!user) {
+                ui.start('#firebaseui-auth-container', uiConfig);
+            }
+        }
+        initFirebaseUI();
+    });
+
     if (loading) {
         return (
             <div>
                 <p>Initialising User...</p>
+                <div className="hidden" id="firebaseui-auth-container"></div>
             </div>
         );
     }
@@ -31,6 +47,7 @@ const Account = (props) => {
         return (
             <div>
                 <p>Error: {error}</p>
+                <div className="hidden" id="firebaseui-auth-container"></div>
             </div>
         );
     }
@@ -42,7 +59,7 @@ const Account = (props) => {
 
                 : <div className="px-4 py-4 max-w-xs mx-auto mt-[10vh] bg-background2">
                     <h1 className="text-center font-indie text-4xl mt-8 mb-24">LOGIN</h1>
-                    <StyledFirebaseAuth className='mb-8' uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                    <div id="firebaseui-auth-container"></div>
                 </div>}
         </>
 

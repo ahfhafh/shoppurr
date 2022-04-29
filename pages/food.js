@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import firebase from '../firebase/app';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useDownloadURL } from 'react-firebase-hooks/storage';
-import firebase from '../firebase/app';
+
 
 const db = firebase.firestore();
 const storage = firebase.storage();
