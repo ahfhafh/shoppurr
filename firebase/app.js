@@ -1,11 +1,6 @@
  import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import 'firebase/compat/storage';
-
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -17,8 +12,6 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-
  const firebaseApp = initializeApp(firebaseConfig);
-// firebase.initializeApp(firebaseConfig);
 
 export default firebaseApp

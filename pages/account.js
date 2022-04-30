@@ -67,6 +67,5 @@ const Account = (props) => {
 }
 
 // TODO: loading animations
-// TODO: switching between login logout animation
 
 export default Account;
