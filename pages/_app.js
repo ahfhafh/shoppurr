@@ -1,15 +1,21 @@
-import '../styles/globals.css'
-import { config } from '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/fontawesome-svg-core/styles.css'
-import Navbar from '../components/navbar'
+import '../styles/globals.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useEffect, useState, useCallback } from "react";
+import Navbar from '../components/navbar';
 import Cart from '../components/cart';
 import Footer from '../components/footer';
-config.autoAddCss = false
+config.autoAddCss = false;
+
+const MOBILE_WINDOW = 768;
 
 function MyApp({ Component, pageProps }) {
-  const MOBILE_WINDOW = 768;
 
+  /**
+   * Determines whether the current viewport width is Mobile or not.
+   * @param width - The width in pixels to check against.
+   * @returns A boolean value that is true if the window width is less than the width passed in.
+   */
   const useMediaQuery = (width) => {
     const [targetReached, setTargetReached] = useState(false);
 
@@ -22,22 +28,23 @@ function MyApp({ Component, pageProps }) {
     }, []);
 
     useEffect(() => {
-      const media = window.matchMedia(`(max-width: ${width}px)`)
-      media.addEventListener('change', e => updateTarget(e))
+      const media = window.matchMedia(`(max-width: ${width}px)`);
+      media.addEventListener('change', e => updateTarget(e));
 
       // Check on mount (callback is not called until a change occurs)
       if (media.matches) {
-        setTargetReached(true)
+        setTargetReached(true);
       }
 
-      return () => media.removeEventListener('change', e => updateTarget(e))
-    }, [width, updateTarget])
+      return () => media.removeEventListener('change', e => updateTarget(e));
+    }, [width, updateTarget]);
 
     return targetReached;
   };
 
   const [toggleCart, setToggleCart] = useState(false);
 
+  /* Prevent the user from scrolling when the cart is open. */
   useEffect(() => {
     if (toggleCart) {
       document.body.style.overflow = "hidden";
@@ -46,20 +53,28 @@ function MyApp({ Component, pageProps }) {
     }
   }, [toggleCart]);
 
+  const [cartItems, setCartItems] = useState([]);
+  const [cartItemsNum, setCartItemsNum] = useState();
+
+  useEffect(() => {
+    setCartItemsNum(cartItems.length);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartItems]);
+
   return (
     <>
       <div style={{ 'minHeight': 'calc(100vh - 200px)' }}>
-        <Cart useMediaQuery={useMediaQuery(MOBILE_WINDOW)} toggleCart={toggleCart} setToggleCart={() => setToggleCart(!toggleCart)} />
-        <Navbar useMediaQuery={useMediaQuery(MOBILE_WINDOW)} setToggleCart={() => setToggleCart(!toggleCart)} />
-        <Component {...pageProps} />
+        <Cart useMediaQuery={useMediaQuery(MOBILE_WINDOW)} toggleCart={toggleCart} setToggleCart={() => setToggleCart(!toggleCart)} cartItems={cartItems} />
+        <Navbar useMediaQuery={useMediaQuery(MOBILE_WINDOW)} setToggleCart={() => setToggleCart(!toggleCart)} cartItemsNum={cartItemsNum} />
+        <Component {...pageProps} addToCart={(item) => setCartItems([...cartItems, item])} />
       </div>
       <Footer />
     </>
 
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
 
 
     // TODO: navbar: close slide after clicking link

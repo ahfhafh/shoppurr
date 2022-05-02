@@ -34,11 +34,8 @@ const Food = (props) => {
         }
 
         getProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router]);
-
-    const addToCartHandler = () => {
-        props.addToCart(id);
-    };
 
     return (
         <>
@@ -55,7 +52,7 @@ const Food = (props) => {
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                     />
-                    <button className='text-lg text-background2 bg-accent px-24 py-4' onClick={() => addToCartHandler()}>Add To Cart</button>
+                    <button className='text-lg text-background2 bg-accent px-24 py-4' onClick={() => props.addToCart(product)}>Add To Cart</button>
                 </div>
             )}
         </>

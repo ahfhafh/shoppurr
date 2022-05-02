@@ -1,53 +1,51 @@
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
-import { useCollectionDataOnce } from 'react-firebase-hooks/firestore';
-import { useDownloadURL } from 'react-firebase-hooks/storage';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import firebaseApp from '../firebase/app';
-import { collection } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
+import { shimmer, toBase64 } from '../utils/imageLoad';
 
-const Food = (props) => {
+const Food = () => {
 
     const db = getFirestore(firebaseApp);
 
-    const postConverter = {
-        fromFirestore(snapshot, options) {
-            const data = snapshot.data(options)
-            return {
-                id: snapshot.id,
-                Name: data.Name,
-                Image: data.Image,
-            };
-        }
-    };
-
-    const ref = collection(db, "Foods").withConverter(postConverter);
-    const [values, loading, error, snapshot] = useCollectionDataOnce(ref, {});
-
-
-    // const products = useMemo(() => {
-    //     []
-    // }, [])
-
     const [products, setProducts] = useState([]);
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        async function getProducts() {
+            setLoading(true);
+            await getDocs(collection(db, 'Foods')).then((snapshot) => {
+                setProducts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            }).catch((err) => {
+                setError(err);
+                console.log(err);
+            });
+            setLoading(false);
+        }
+        getProducts();
+    }, [])
 
     return (
         <div>
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
             {loading && <span>Loading...</span>}
-            {snapshot && (
-                values.map((product) => {
-                    return (<div key={product.id}>
-                        <h2>{product.Name}</h2>
-                        {console.log(product)}
-
-                        {/* <Image
+            {products && (
+                products.map((product) => (
+                    <div className='flex' key={product.id}>
+                        <Link href={`foods/${product.id}`}><a className='text-4xl'>{product.Name}</a></Link>
+                        <Image
                             src={product.Image}
                             alt="Food 1"
                             height="256px"
-                            width="256px" /> */}
-                    </div>)
-                })
+                            width="256px"
+                            placeholder="blur"
+                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                        />
+                    </div>
+                ))
             )}
         </div>
     );

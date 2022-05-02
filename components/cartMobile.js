@@ -7,7 +7,7 @@ const CartMobile = (props) => {
     const modalRef = useRef();
 
     function closeModal(e) {
-        if (modalRef.current === e.target) props.setToggleCart()
+        if (modalRef.current === e.target) props.setToggleCart();
     }
 
     return (
@@ -28,9 +28,12 @@ const CartMobile = (props) => {
             >
                 <button className="absolute right-8 top-8" onClick={() => props.setToggleCart()}>X</button>
                 <ul className="text-center py-2 w-full overflow-y-auto">
-                    {props.cartItems.map((item, i) => {
-                        return (<li key={i} className='my-2' >{item.name} {item.price} {item.quanty}</li>)
-                    })}
+                    {props.cartItems.length ?
+                        props.cartItems.map((item, i) =>
+                            <li key={i} className='my-2' >{item.Name} {item.Price} {item.Qty}</li>
+                        )
+                        : <p>No items in cart</p>
+                    }
                 </ul>
                 <p className="text-center mt-4">subtotal: </p>
                 <Link href='/'>
@@ -39,6 +42,6 @@ const CartMobile = (props) => {
             </motion.div>
         </motion.div>
     );
-}
+};
 
 export default CartMobile;
