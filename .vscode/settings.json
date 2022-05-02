@@ -1,4 +1,5 @@
 {
     "todo-tree.tree.showBadges": false,
-    "todo-tree.tree.disableCompactFolders": true
+    "todo-tree.tree.disableCompactFolders": true,
+    "docwriter.style": "Auto-detect"
 }
