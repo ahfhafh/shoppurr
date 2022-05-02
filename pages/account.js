@@ -1,44 +1,40 @@
-import firebase from "../firebase/app";
-import { getAuth } from "firebase/auth";
+import firebaseApp from "../firebase/app";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import signout from "./api/logout";
-import { useEffect } from "react";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-import 'firebaseui/dist/firebaseui.css'
+const provider = new GoogleAuthProvider();
 
 const Account = (props) => {
 
-    const auth = getAuth(firebase);
+    const auth = getAuth(firebaseApp);
+
+    function googleAuth() {
+        signInWithPopup(auth, provider).then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+            });
+    }
+
     const [user, loading, error] = useAuthState(auth);
-
-    var uiConfig = {
-        signInFlow: 'popup',
-        signInSuccessUrl: '/',
-        signInOptions: [
-            // Leave the lines as is for the providers you want to offer your users.
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-            firebase.auth.EmailAuthProvider.PROVIDER_ID
-        ],
-    };
-
-    useEffect(() => {
-        async function initFirebaseUI() {
-            // delay the import until window object is ready
-            const firebaseui = await import("firebaseui");
-            const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth);
-            if (!user) {
-                ui.start('#firebaseui-auth-container', uiConfig);
-            }
-        }
-        initFirebaseUI();
-    });
 
     if (loading) {
         return (
             <div>
                 <p>Initialising User...</p>
-                <div className="hidden" id="firebaseui-auth-container"></div>
             </div>
         );
     }
@@ -47,7 +43,6 @@ const Account = (props) => {
         return (
             <div>
                 <p>Error: {error}</p>
-                <div className="hidden" id="firebaseui-auth-container"></div>
             </div>
         );
     }
@@ -59,12 +54,18 @@ const Account = (props) => {
 
                 : <div className="px-4 py-4 max-w-xs mx-auto mt-[10vh] bg-background2">
                     <h1 className="text-center font-indie text-4xl mt-8 mb-24">LOGIN</h1>
-                    <div id="firebaseui-auth-container"></div>
+                    <div className='mb-8'>
+                        <button onClick={googleAuth}>GOOGLE</button>
+                        <br />
+                        <button>Facebook</button>
+                        <br />
+                        <button>Email</button>
+                    </div>
                 </div>}
         </>
 
     );
-}
+};
 
 // TODO: loading animations
 
