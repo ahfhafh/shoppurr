@@ -3,11 +3,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import signout from "./api/logout";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-const provider = new GoogleAuthProvider();
-
-const Account = (props) => {
+const Account = () => {
 
     const auth = getAuth(firebaseApp);
+    const provider = new GoogleAuthProvider();
 
     function googleAuth() {
         signInWithPopup(auth, provider).then((result) => {
