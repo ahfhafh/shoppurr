@@ -4,6 +4,6 @@ const Footer = (props) => {
             Powered by{' '}Nothing
         </footer>
     );
-}
+};
 
 export default Footer;
