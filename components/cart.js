@@ -6,8 +6,8 @@ const Cart = (props) => {
 
     return (<div>
         <AnimatePresence exitBeforeEnter>{props.toggleCart && (props.useMediaQuery
-            ? <CartMobile cartItems={props.cartItems} setToggleCart={() => props.setToggleCart()} />
-            : <CartDesktop cartItems={props.cartItems} setToggleCart={() => props.setToggleCart()} />)
+            ? <CartMobile cartItems={props.cartItems} setToggleCart={() => props.setToggleCart()} removeCartItem={(i) => props.removeCartItem(i)} incNumInCart={(i) => props.incNumInCart(i)} decNumInCart={(i) => props.decNumInCart(i)} />
+            : <CartDesktop cartItems={props.cartItems} setToggleCart={() => props.setToggleCart()} removeCartItem={(i) => props.removeCartItem(i)} incNumInCart={(i) => props.incNumInCart(i)} decNumInCart={(i) => props.decNumInCart(i)} />)
         }</AnimatePresence>
     </div>);
 };

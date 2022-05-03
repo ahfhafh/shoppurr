@@ -61,3 +61,5 @@ const Food = (props) => {
 };
 
 export default Food;
+
+// TODO: open cart when adding item to cart
