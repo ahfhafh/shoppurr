@@ -57,9 +57,25 @@ function MyApp({ Component, pageProps }) {
   const [cartItemsNum, setCartItemsNum] = useState();
 
   const addToCartHandler = (item) => {
-    // TODO: check if item already exists in cart
-    item.numInCart = 1;
-    setCartItems([...cartItems, item]);
+    /* Check if the item is already in the cart. If it is, it will increase the quantity of the item
+    in the cart. If it is not, it will add the item to the cart. */
+    let exist = false;
+    setCartItems(cartItems.map((e) => {
+      if (e.id === item.id) {
+        exist = true;
+        /* If not enough in stock */
+        if (e.numInCart >= e.Qty) {
+          console.log('Not enough in stock');
+          return e;
+        }
+        e.numInCart += 1;
+        return e;
+      } else { return e; }
+    }));
+    if (!exist) {
+      item.numInCart = 1;
+      setCartItems([...cartItems, item]);
+    }
   };
 
   const removeCartItem = (i) => {
@@ -71,7 +87,7 @@ function MyApp({ Component, pageProps }) {
       if (index === i) {
         (e.numInCart += 1);
         return e;
-      } else {return e;}
+      } else { return e; }
     }));
   };
 
@@ -80,7 +96,7 @@ function MyApp({ Component, pageProps }) {
       if (index === i) {
         (e.numInCart -= 1);
         return e;
-      } else {return e;}
+      } else { return e; }
     }));
   };
 

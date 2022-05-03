@@ -34,7 +34,7 @@ const Food = (props) => {
         }
 
         getProduct();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router]);
 
     return (
@@ -43,7 +43,6 @@ const Food = (props) => {
             {loading && <span>Loading...</span>}
             {product && (
                 <div className=''>
-                    <Link href={`foods/${product.id}`}><a className='text-4xl'>{product.Name}</a></Link>
                     <Image
                         src={product.Image}
                         alt="Food 1"
@@ -52,7 +51,11 @@ const Food = (props) => {
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                     />
-                    <button className='text-lg text-background2 bg-accent px-24 py-4' onClick={() => props.addToCart(product)}>Add To Cart</button>
+                    <div>
+                        <p className='text-4xl'>{product.Name}</p>
+                        <p>{product.Description}</p>
+                    </div>
+                    <button className='text-lg text-background2 bg-accent px-24 py-4' onClick={() => {product.id = id; props.addToCart(product);}}>Add To Cart</button>
                 </div>
             )}
         </>
