@@ -1,23 +1,35 @@
-import firebase from "../firebase/app";
+import firebaseApp from "../firebase/app";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import signout from "./api/logout";
-import { useState } from "react";
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+const provider = new GoogleAuthProvider();
 
 const Account = (props) => {
 
-    const auth = firebase.auth();
-    const [user, loading, error] = useAuthState(auth);
+    const auth = getAuth(firebaseApp);
 
-    const uiConfig = {
-        signInFlow: 'popup',
-        signInSuccessUrl: '/',
-        signInOptions: [
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-            firebase.auth.EmailAuthProvider.PROVIDER_ID
-        ],
-    };
+    function googleAuth() {
+        signInWithPopup(auth, provider).then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+            });
+    }
+
+    const [user, loading, error] = useAuthState(auth);
 
     if (loading) {
         return (
@@ -42,14 +54,19 @@ const Account = (props) => {
 
                 : <div className="px-4 py-4 max-w-xs mx-auto mt-[10vh] bg-background2">
                     <h1 className="text-center font-indie text-4xl mt-8 mb-24">LOGIN</h1>
-                    <StyledFirebaseAuth className='mb-8' uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                    <div className='mb-8'>
+                        <button onClick={googleAuth}>GOOGLE</button>
+                        <br />
+                        <button>Facebook</button>
+                        <br />
+                        <button>Email</button>
+                    </div>
                 </div>}
         </>
 
     );
-}
+};
 
 // TODO: loading animations
-// TODO: switching between login logout animation
 
 export default Account;

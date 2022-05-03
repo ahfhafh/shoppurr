@@ -2,17 +2,16 @@ import NavSlide from "./navbarMobileSlide";
 import NavbarDesktopLinks from "./navbarDesktopLinks";
 import NavbarMobileMenu from "./navbarMobileMenu";
 import Link from 'next/link';
-import Image from "next/image";
 import Logo from "../public/images/logo-dark.svg";
 import { useState, useEffect } from "react";
-import { AnimatePresence } from "framer-motion"
+import { AnimatePresence } from "framer-motion";
 
 const Navbar = (props) => {
     const [toggleSlideNav, setToggleSlideNav] = useState(false);
 
     useEffect(() => {
         (!props.useMediaQuery && setToggleSlideNav(false));
-    }, [props.useMediaQuery])
+    }, [props.useMediaQuery]);
 
     return (
         <nav>
@@ -25,14 +24,16 @@ const Navbar = (props) => {
                         </a>
                     </Link>
                 </div>
-                {!props.useMediaQuery && <NavbarDesktopLinks cartItems={1} setToggleCart={() => props.setToggleCart()} />}
+                {!props.useMediaQuery && <NavbarDesktopLinks cartItems={props.cartItemsNum} setToggleCart={() => props.setToggleCart()} />}
             </div>
-            {props.useMediaQuery && <NavbarMobileMenu cartItems={1} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} setToggleCart={() => props.setToggleCart()} />}
+            {props.useMediaQuery && <NavbarMobileMenu cartItems={props.cartItemsNum} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} setToggleCart={() => props.setToggleCart()} />}
             <AnimatePresence exitBeforeEnter>
                 {toggleSlideNav && <NavSlide />}
             </AnimatePresence>
         </nav>
     );
-}
+};
 
 export default Navbar;
+
+// TODO: change icons to svgs

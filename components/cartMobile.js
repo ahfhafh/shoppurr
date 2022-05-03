@@ -1,13 +1,16 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Minus_sign from '../public/images/minus-sign.svg';
+import Plus_sign from '../public/images/plus-sign.svg';
 
 const CartMobile = (props) => {
 
     const modalRef = useRef();
 
     function closeModal(e) {
-        if (modalRef.current === e.target) props.setToggleCart()
+        if (modalRef.current === e.target) props.setToggleCart();
     }
 
     return (
@@ -28,9 +31,29 @@ const CartMobile = (props) => {
             >
                 <button className="absolute right-8 top-8" onClick={() => props.setToggleCart()}>X</button>
                 <ul className="text-center py-2 w-full overflow-y-auto">
-                    {props.cartItems.map((item, i) => {
-                        return (<li key={i} className='my-2' >{item.name} {item.price} {item.quanty}</li>)
-                    })}
+                    {props.cartItems.length ?
+                        props.cartItems.map((item, i) =>
+                            <li key={i} className='my-2 mx-8 flex items-center' >
+                                <button className="" onClick={() => props.removeCartItem(i)}>X</button>
+                                <Image
+                                    src={item.Image}
+                                    alt={item.Name}
+                                    width='128px'
+                                    height='128px'
+                                />
+                                <div className="grow text-left">
+                                    <p className="font-medium">{item.Name}</p>
+                                    <p className="text-sm">{`$${item.Price}`}</p>
+                                </div>
+                                <div className="flex items-center">
+                                    <button className="p-2 ring-1 ring-neutral-400 hover:ring-black disabled:ring-neutral-400 disabled:cursor-not-allowed" disabled={item.numInCart <= 1} onClick={() => props.decNumInCart(i)}><Minus_sign /></button>
+                                    <label className="px-4 inline-block border-y h-8 border-neutral-400">{item.numInCart}</label>
+                                    <button className="p-2 ring-1 ring-neutral-400 hover:ring-black disabled:ring-neutral-400 disabled:cursor-not-allowed" disabled={item.numInCart >= item.Qty} onClick={() => props.incNumInCart(i)}><Plus_sign /></button>
+                                </div>
+                            </li>
+                        )
+                        : <p>No items in cart</p>
+                    }
                 </ul>
                 <p className="text-center mt-4">subtotal: </p>
                 <Link href='/'>
@@ -39,6 +62,6 @@ const CartMobile = (props) => {
             </motion.div>
         </motion.div>
     );
-}
+};
 
 export default CartMobile;
