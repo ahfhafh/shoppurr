@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import firebaseApp from '../firebase/app';
+import firebaseApp from '../../firebase/app';
 import { collection, getDocs } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
-import { shimmer, toBase64 } from '../utils/imageLoad';
+import { shimmer, toBase64 } from '../../utils/imageLoad';
 
 const Food = () => {
 
@@ -18,7 +18,7 @@ const Food = () => {
         async function getProducts() {
             setLoading(true);
             await getDocs(collection(db, 'Foods')).then((snapshot) => {
-                setProducts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+                setProducts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
             }).catch((err) => {
                 setError(err);
                 console.log(err);
@@ -26,7 +26,8 @@ const Food = () => {
             setLoading(false);
         }
         getProducts();
-    }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div>
@@ -35,7 +36,7 @@ const Food = () => {
             {products && (
                 products.map((product) => (
                     <div className='flex' key={product.id}>
-                        <Link href={`foods/${product.id}`}><a className='text-4xl'>{product.Name}</a></Link>
+                        <Link href={`food/${product.id}`}><a className='text-4xl'>{product.Name}</a></Link>
                         <Image
                             src={product.Image}
                             alt="Food 1"
@@ -49,7 +50,7 @@ const Food = () => {
             )}
         </div>
     );
-}
+};
 
 export default Food;
 
