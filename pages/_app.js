@@ -94,7 +94,7 @@ function MyApp({ Component, pageProps }) {
   /* Get cart from local storage */
   useEffect(() => {
     const cart_history = JSON.parse(localStorage.getItem('cart_id'));
-    if (cart_history.length > 0) setCartItems(cart_history);
+    if (cart_history) setCartItems(cart_history);
     setCartItemsNum(cartItems.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
