@@ -34,7 +34,6 @@ const Food = (props) => {
             });
             setLoading(false);
         }
-
         getProduct();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router]);
@@ -94,7 +93,7 @@ const Food = (props) => {
                             <Link href='/'><a className='text-md underline'>{product.Brand}</a></Link>
                             <div className='bg-background flex'>
                                 <div className='absolute w-[132px] h-[24px]'>
-                                    <div className={`w-[${Math.round(product.Rating / 5 * 100)}%] h-full bg-yellow-300`}></div>
+                                    <div className={`h-full bg-yellow-300`} style={{ width: `${product.Rating ? Math.round(product.Rating / 5 * 100) : 0}%` }}></div>
                                 </div>
                                 <Star_template className='z-10' />
                                 <p className='ml-2 underline'>placeholder</p>
@@ -103,9 +102,9 @@ const Food = (props) => {
                             <button className='text-lg text-background2 bg-accent px-20 py-2 mt-8' onClick={() => { product.id = id; props.addToCart(product); }}>Add To Cart</button>
 
                             <div className='mt-8'>
-                                <button className={`border-b-2 border-b-${(tab < 1) ? 'black' : 'background'} w-1/3 text-center`} onClick={() => setTab(0)} disabled={tab === 0}>Description</button>
-                                <button className={`border-b-2 border-b-${(tab === 1) ? 'black' : 'background'} w-1/3 text-center mb-4`} onClick={() => setTab(1)} disabled={tab === 1}>Shipping</button>
-                                <button className={`border-b-2 border-b-${(tab > 1) ? 'black' : 'background'} w-1/3 text-center mb-4`} onClick={() => setTab(2)} disabled={tab === 2}>Returns</button>
+                                <button className={`border-b-2 ${(tab < 1) ? 'border-b-black' : 'border-b-background'} w-1/3 text-center`} onClick={() => setTab(0)} disabled={tab === 0}>Description</button>
+                                <button className={`border-b-2 ${(tab === 1) ? 'border-b-black' : 'border-b-background'} w-1/3 text-center mb-4`} onClick={() => setTab(1)} disabled={tab === 1}>Shipping</button>
+                                <button className={`border-b-2 ${(tab > 1) ? 'border-b-black' : 'border-b-background'} w-1/3 text-center mb-4`} onClick={() => setTab(2)} disabled={tab === 2}>Returns</button>
 
                                 {renderTab()}
                             </div>
@@ -129,3 +128,4 @@ export default Food;
 // TODO: better view of other pictures, better scroll
 // TODO: review, ratings, num of ratings
 // TODO?: add amount to cart
+// BUG: rating rendering above cart
