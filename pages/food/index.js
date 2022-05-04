@@ -33,7 +33,7 @@ const Food = () => {
     return (
         <div className='w-full'>
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
-            {loading && <Loader className='absolute top-1/2 bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' />}
+            {loading && <Loader className='absolute top-1/2 left-1/2 -translate-x-1/2' />}
             {products && (
                 <>
                     <div className='h-72 md:h-96 relative bg-center bg-cover'>
