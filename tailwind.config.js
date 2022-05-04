@@ -13,9 +13,9 @@ module.exports = {
         'background2': '#FFFFFE',
         'text': '#0D0D0D',
         'accent': '#ff8e3c',
-        'accent2': '#D9376E'
+        'accent2': '#D9376E',
       },
     },
   },
   plugins: [],
-}
+};
