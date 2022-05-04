@@ -40,8 +40,6 @@ const Food = () => {
                         <Image
                             src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/food_header.jpg?alt=media&token=5e4fb3a9-c935-4afb-a82e-7401cd877bff'
                             alt="Cat Foods"
-                            height="630px"
-                            width='1200px'
                             layout='fill'
                             objectFit='cover'
                             quality={100}
