@@ -55,6 +55,7 @@ function MyApp({ Component, pageProps }) {
 
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsNum, setCartItemsNum] = useState();
+  const [cartSubtotal, setCartSubtotal] = useState(0);
 
   const addToCartHandler = (item) => {
     /* Check if the item is already in the cart. If it is, it will increase the quantity of the item
