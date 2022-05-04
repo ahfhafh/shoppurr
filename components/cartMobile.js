@@ -46,9 +46,9 @@ const CartMobile = (props) => {
                                     <p className="text-sm">{`$${item.Price}`}</p>
                                 </div>
                                 <div className="flex items-center">
-                                    <button className="p-2 ring-1 ring-neutral-400 hover:ring-black disabled:ring-neutral-400 disabled:cursor-not-allowed" disabled={item.numInCart <= 1} onClick={() => props.decNumInCart(i)}><Minus_sign /></button>
+                                    <button className="p-2 ring-1 ring-neutral-400 hover:ring-black disabled:ring-neutral-400 disabled:cursor-not-allowed disabled:fill-zinc-300" disabled={item.numInCart <= 1} onClick={() => props.decNumInCart(i)}><Minus_sign /></button>
                                     <label className="px-4 inline-block border-y h-8 border-neutral-400">{item.numInCart}</label>
-                                    <button className="p-2 ring-1 ring-neutral-400 hover:ring-black disabled:ring-neutral-400 disabled:cursor-not-allowed" disabled={item.numInCart >= item.Qty} onClick={() => props.incNumInCart(i)}><Plus_sign /></button>
+                                    <button className="p-2 ring-1 ring-neutral-400 hover:ring-black disabled:ring-neutral-400 disabled:cursor-not-allowed disabled:fill-zinc-300" disabled={item.numInCart >= item.Qty} onClick={() => props.incNumInCart(i)}><Plus_sign /></button>
                                 </div>
                             </li>
                         )
