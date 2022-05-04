@@ -31,21 +31,35 @@ const Food = () => {
     }, []);
 
     return (
-        <div className='w-full px-10'>
+        <div className='w-full'>
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
             {loading && <Loader className='absolute top-1/2 bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' />}
             {products && (
-                <div>
-                    <div className='text-3xl text-center'>Show Case</div>
-                    <div>
-                        <div className='md:sticky top-8 w-52 md:float-left flex flex-col items-start'>
+                <>
+                    <div className='h-72 md:h-96 relative bg-center bg-cover'>
+                        <Image
+                            src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/food_header.jpg?alt=media&token=5e4fb3a9-c935-4afb-a82e-7401cd877bff'
+                            alt="Cat Foods"
+                            height="630px"
+                            width='1200px'
+                            layout='fill'
+                            objectFit='cover'
+                            quality={100}
+                            placeholder="blur"
+                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                            className='bg-center bg-cover'
+                        />
+                        <h1 className='absolute w-full text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-extrabold'>Cat Food</h1>
+                    </div>
+                    <div className='px-10'>
+                        <div className='md:sticky md:top-8 mt-10 w-52 md:float-left flex flex-col items-start'>
                             <p className='font-medium'>Sort By:</p>
                             <button>Price: Low to High</button>
                             <button>Price: High to Low</button>
                             <button>Top Rated</button>
                             <button>Newest</button>
                         </div>
-                        <div className='mt-8 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+                        <div className='mt-8 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center'>
                             {products.map((product) => (
                                 <Link href={`food/${product.id}`} key={product.id}><a className='mb-16'>
                                     <Image
@@ -62,8 +76,7 @@ const Food = () => {
                             ))}
                         </div>
                     </div>
-                </div>
-
+                </>
             )}
         </div>
     );
