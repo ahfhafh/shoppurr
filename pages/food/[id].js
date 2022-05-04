@@ -6,6 +6,7 @@ import firebaseApp from '../../firebase/app';
 import { doc, getDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { shimmer, toBase64 } from '../../utils/imageLoad';
+import Loader from '../../public/images/loader.svg';
 
 const Food = (props) => {
 
@@ -40,7 +41,7 @@ const Food = (props) => {
     return (
         <>
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
-            {loading && <span>Loading...</span>}
+            {loading && <Loader className='absolute top-1/2 bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' />}
             {product && (
                 <div className=''>
                     <Image
