@@ -147,6 +147,7 @@ export default MyApp;
     // TODO: navbar: mobile slide remove cart btn when empty
     // IMPLEMENT: navbar: show/hide on scroll
     // IMPLEMENT: second font
+    // TODO: change scroll styling
 
     // TODO: redux?
     // TODO: context?
