@@ -6,7 +6,7 @@ const Footer = (props) => {
                 <input className="border" type='email' placeholder="Email"></input>
                 <button className="ring" type='submit'>yes</button>
             </div>
-            <div>Powered by Nothing</div>
+            <div>Powered by <a href="https://github.com/ahfhafh/shoppurr" className="underline">Github Repo</a></div>
         </footer>
     );
 };
