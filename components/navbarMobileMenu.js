@@ -45,7 +45,7 @@ const NavbarMobileMenu = (props) => {
                 key="cartBtn"
                 variants={cartBtnVariants}
                 animate={!hideCartBtn ? 'open' : 'closed'}
-                onClick={() => props.setToggleCart()}
+                onClick={() => props.toggleCart()}
             >
                 <motion.span
                     className={`fa-layers fa-fw fa-lg mt-1`}

@@ -27,7 +27,7 @@ const NavbarDesktopLinks = (props) => {
                     <FontAwesomeIcon icon={faMagnifyingGlass} className="text-4xl text-accent" />
                 </a></Link>
 
-                <button onClick={() => props.setToggleCart()}>
+                <button onClick={() => props.toggleCart()}>
                     <span className="fa-layers fa-fw fa-lg mt-2" title="Cart">
                         <FontAwesomeIcon icon={faCartShopping} className="text-4xl text-accent" />
                         {props.cartItems > 0 && <span className="fa-layers-counter text-5xl" style={{ '--fa-counter-background-color': '#D9376E', '--fa-right': '-20px', '--fa-top': '-15px' }}>{props.cartItems}</span>}

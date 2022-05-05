@@ -24,9 +24,9 @@ const Navbar = (props) => {
                         </a>
                     </Link>
                 </div>
-                {!props.useMediaQuery && <NavbarDesktopLinks cartItems={props.cartItemsNum} setToggleCart={() => props.setToggleCart()} />}
+                {!props.useMediaQuery && <NavbarDesktopLinks cartItems={props.cartItemsNum} toggleCart={() => props.toggleCart()} />}
             </div>
-            {props.useMediaQuery && <NavbarMobileMenu cartItems={props.cartItemsNum} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} setToggleCart={() => props.setToggleCart()} />}
+            {props.useMediaQuery && <NavbarMobileMenu cartItems={props.cartItemsNum} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} toggleCart={() => props.toggleCart()} />}
             <AnimatePresence exitBeforeEnter>
                 {toggleSlideNav && <NavSlide />}
             </AnimatePresence>

@@ -109,29 +109,29 @@ function MyApp({ Component, pageProps }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-    /* Save cart to local storage */
-    useEffect(() => {
-      setCartItemsNum(cartItems.length);
-      if (cartItems) localStorage.setItem('cart_id', JSON.stringify(cartItems));
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cartItems]);
+  /* Save cart to local storage */
+  useEffect(() => {
+    setCartItemsNum(cartItems.length);
+    if (cartItems) localStorage.setItem('cart_id', JSON.stringify(cartItems));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartItems]);
 
   return (
     <>
       <div style={{ 'minHeight': 'calc(100vh - 200px)' }}>
         <Cart
           useMediaQuery={useMediaQuery(MOBILE_WINDOW)}
-          toggleCart={toggleCart}
-          setToggleCart={() => setToggleCart(!toggleCart)}
+          cartState={toggleCart}
+          toggleCart={() => setToggleCart(!toggleCart)}
           cartItems={cartItems}
           removeCartItem={(i) => removeCartItem(i)}
           incNumInCart={(i) => incNumInCart(i)}
           decNumInCart={(i) => decNumInCart(i)} />
         <Navbar
           useMediaQuery={useMediaQuery(MOBILE_WINDOW)}
-          setToggleCart={() => setToggleCart(!toggleCart)}
+          toggleCart={() => setToggleCart(!toggleCart)}
           cartItemsNum={cartItemsNum} />
-        <Component {...pageProps} addToCart={(item) => addToCartHandler(item)} />
+        <Component {...pageProps} addToCart={(item) => addToCartHandler(item)} toggleCart={() => setToggleCart(true)} />
       </div>
       <Footer />
     </>

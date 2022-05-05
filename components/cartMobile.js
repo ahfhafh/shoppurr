@@ -10,7 +10,7 @@ const CartMobile = (props) => {
     const modalRef = useRef();
 
     function closeModal(e) {
-        if (modalRef.current === e.target) props.setToggleCart();
+        if (modalRef.current === e.target) props.toggleCart();
     }
 
     return (
@@ -29,7 +29,7 @@ const CartMobile = (props) => {
                 exit={{ bottom: '-100vh' }}
                 transition={{ bounce: 0 }}
             >
-                <button className="absolute right-8 top-8" onClick={() => props.setToggleCart()}>X</button>
+                <button className="absolute right-8 top-8" onClick={() => props.toggleCart()}>X</button>
                 <ul className="text-center py-2 w-full overflow-y-auto">
                     {props.cartItems.length ?
                         props.cartItems.map((item, i) =>
@@ -57,7 +57,7 @@ const CartMobile = (props) => {
                 </ul>
                 <p className="text-center mt-4">subtotal: </p>
                 <Link href='/'>
-                    <a className="bg-accent text-background2 text-center text-xl w-10/12 mt-4 rounded-lg p-3 mb-8" onClick={() => props.setToggleCart()}>Checkout</a>
+                    <a className="bg-accent text-background2 text-center text-xl w-10/12 mt-4 rounded-lg p-3 mb-8" onClick={() => props.toggleCart()}>Checkout</a>
                 </Link>
             </motion.div>
         </motion.div>

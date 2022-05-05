@@ -51,6 +51,12 @@ const Food = (props) => {
         }
     }
 
+    function addToCartHandler() {
+        product.id = id;
+        props.addToCart(product);
+        props.toggleCart();
+    }
+
     return (
         <>
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
@@ -99,7 +105,7 @@ const Food = (props) => {
                                 <p className='ml-2 underline'>placeholder</p>
                             </div>
                             <p className='text-2xl'>${product.Price}</p>
-                            <button className='text-lg text-background2 bg-accent px-20 py-2 mt-8' onClick={() => { product.id = id; props.addToCart(product); }}>Add To Cart</button>
+                            <button className='text-lg text-background2 bg-accent px-20 py-2 mt-8' onClick={() => addToCartHandler()}>Add To Cart</button>
 
                             <div className='mt-8'>
                                 <button className={`border-b-2 ${(tab < 1) ? 'border-b-black' : 'border-b-background'} w-1/3 text-center`} onClick={() => setTab(0)} disabled={tab === 0}>Description</button>
@@ -124,7 +130,6 @@ const Food = (props) => {
 
 export default Food;
 
-// TODO: open cart when adding item to cart
 // TODO: better view of other pictures, better scroll
 // TODO: review, ratings, num of ratings
 // TODO?: add amount to cart
