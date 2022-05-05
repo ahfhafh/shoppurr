@@ -55,5 +55,3 @@ const NavSlide = () => {
 };
 
 export default NavSlide;
-
-// BUG: images appear above nav slide
