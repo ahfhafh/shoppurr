@@ -101,13 +101,6 @@ function MyApp({ Component, pageProps }) {
     }));
   };
 
-  /* Save cart to local storage */
-  useEffect(() => {
-    setCartItemsNum(cartItems.length);
-    if (cartItems.length > 0) localStorage.setItem('cart_id', JSON.stringify(cartItems));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartItems]);
-
   /* Get cart from local storage */
   useEffect(() => {
     const cart_history = JSON.parse(localStorage.getItem('cart_id'));
@@ -115,6 +108,13 @@ function MyApp({ Component, pageProps }) {
     setCartItemsNum(cartItems.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+    /* Save cart to local storage */
+    useEffect(() => {
+      setCartItemsNum(cartItems.length);
+      if (cartItems) localStorage.setItem('cart_id', JSON.stringify(cartItems));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cartItems]);
 
   return (
     <>
