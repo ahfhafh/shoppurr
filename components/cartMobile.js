@@ -14,7 +14,7 @@ const CartMobile = (props) => {
     }
 
     return (
-        <motion.div className="z-10 w-full h-full absolute"
+        <motion.div className="z-10 w-full h-full fixed"
             onClick={closeModal}
             ref={modalRef}
             key="modalBackM"
