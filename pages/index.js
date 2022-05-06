@@ -66,7 +66,6 @@ export default function Home() {
       <Head>
         <title>ShopPurr</title>
         <meta name="description" content="Shop cat stuff" />
-        <link rel="icon" href="../public/cat_butt.ico" />
       </Head>
       <main className='overflow-x-clip'>
 
