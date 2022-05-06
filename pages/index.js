@@ -19,6 +19,7 @@ export default function Home() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  /* Initial state of the carouselNum variable is 3 to account 0, 1, 2 for manual switching. */
   const [carouselNum, setCarouselNum] = useState(3);
   const [carouselInterval, setCarouselInterval] = useState();
 
@@ -35,7 +36,6 @@ export default function Home() {
     }
     getProducts();
 
-    // eslint-disable-next-line max-statements-per-line
     // eslint-disable-next-line react-hooks/exhaustive-deps
     setCarouselInterval(setInterval(() => { setCarouselNum(carouselNum += 1); }, 5000));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,29 +43,17 @@ export default function Home() {
 
 
   useEffect(() => {
+    /* Checking if the carouselNum is 0, 1, or 2. Is async so that it won't set multiple intervals */
     if (carouselNum === 0 || carouselNum === 1 || carouselNum === 2) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       if (carouselInterval === undefined) setCarouselInterval(setInterval(() => { setCarouselNum(carouselNum += 1); }, 5000));
     }
-    console.log(carouselNum);
   }, [carouselNum, carouselInterval]);
 
-  function scrollTo1() {
+  function scrollTo(n) {
     clearInterval(carouselInterval);
     setCarouselInterval(undefined);
-    setCarouselNum(0);
-  }
-
-  function scrollTo2() {
-    clearInterval(carouselInterval);
-    setCarouselInterval(undefined);
-    setCarouselNum(1);
-  }
-
-  function scrollTo0() {
-    clearInterval(carouselInterval);
-    setCarouselInterval(undefined);
-    setCarouselNum(2);
+    setCarouselNum(n);
   }
 
   const popularItems = useRef(null);
@@ -78,9 +66,9 @@ export default function Home() {
       <Head>
         <title>ShopPurr</title>
         <meta name="description" content="Shop cat stuff" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="../public/cat_butt.ico" />
       </Head>
-      <main className=''>
+      <main className='overflow-x-clip'>
 
         <div className='relative'>
           <div className='relative h-72 md:h-96 w-full' ref={carousel}>
@@ -122,20 +110,20 @@ export default function Home() {
             </div>
           </div>
           <div className='absolute bottom-4 mx-auto left-0 right-0 w-min flex'>
-            <button className='' aria-label="Panel 1" onClick={() => scrollTo1()}><CircleIndicator className={(carouselNum % 3 === 0) ? "fill-black" : "fill-transparent" `hover:fill-black`} /> </button>
-            <button className='' aria-label="Panel 2" onClick={() => scrollTo2()}><CircleIndicator className={(carouselNum % 3 === 1) ? "fill-black" : "fill-transparent"} /></button>
-            <button className='' aria-label="Panel 3" onClick={() => scrollTo0()}><CircleIndicator className={(carouselNum % 3 === 2) ? "fill-black" : "fill-transparent"} /></button>
+            <button className='' aria-label="Panel 1" onClick={() => scrollTo(0)}><CircleIndicator className={`${(carouselNum % 3 === 0) ? "fill-accent" : "fill-transparent"}   hover:fill-accent`} /></button>
+            <button className='' aria-label="Panel 2" onClick={() => scrollTo(1)}><CircleIndicator className={`${(carouselNum % 3 === 1) ? "fill-accent" : "fill-transparent"}   hover:fill-accent`} /></button>
+            <button className='' aria-label="Panel 3" onClick={() => scrollTo(2)}><CircleIndicator className={`${(carouselNum % 3 === 2) ? "fill-accent" : "fill-transparent"}   hover:fill-accent`} /></button>
           </div>
         </div>
 
-        {error && <strong>Error: {JSON.stringify(error)}</strong>}
-        {loading && <Loader className='absolute top-1/2 left-1/2 -translate-x-1/2' />}
-        {products && (
-          <>
-            <div className='px-10 mt-8'>
-              {/* TODO: get items most rated */}
-              <h1 className='text-4xl'>Popular:</h1>
-              <div className='relative mt-8 mb-16 mx-auto max-w-7xl flex items-center border'>
+        <div className='px-10 mt-8'>
+          {/* TODO: get items most rated */}
+          <h1 className='text-4xl'>Popular:</h1>
+          <div className='relative mt-8 mb-16 mx-auto max-w-7xl flex items-center border'>
+            {error && <strong>Error: {JSON.stringify(error)}</strong>}
+            {loading && <Loader className='absolute left-1/2 -translate-x-1/2' />}
+            {products && (
+              <>
                 <LeftArrow className='absolute left-4 z-10' onClick={() => scrollLeft(popularItems)} role='button' />
                 <RightArrow className='absolute right-4 z-10' onClick={() => scrollRight(popularItems)} role='button' />
                 <div className=' pb-8 flex gap-8 overflow-x-scroll snap-x' ref={popularItems}>
@@ -154,14 +142,17 @@ export default function Home() {
                     </a></Link>
                   ))}
                 </div>
-              </div>
-            </div>
-          </>
-        )}
+              </>
+            )}
+          </div>
+        </div>
 
-        <div className='grid grid-rows-2 grid-cols-3 grid-flow-col md:w-3/4 mx-auto'>
-          <div className='relative block row-span-2 col-span-2'>
-            <p className='absolute top-2 left-10 z-10'>o yea</p>
+        <div className='grid grid-rows-3 md:grid-rows-2 md:grid-cols-3 grid-flow-col md:w-3/4 mx-auto border'>
+          <div className='relative block md:row-span-2 col-span-2'>
+            <div className='absolute bottom-40 left-10 z-10'>
+              <p className='text-4xl font-extrabol'>BEAUTIFUL CAT CLOTHING!</p>
+              <Link href='/clothing'><a className=''>SHOP NOW {'>'}</a></Link>
+            </div>
             <Image
               src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-2.jpg?alt=media&token=2cce8815-efbb-4495-a27d-6d1e6052d4bf'
               alt='cat dressing'
@@ -171,6 +162,7 @@ export default function Home() {
             />
           </div>
           <div className='relative block'>
+            <p className='absolute top-10 left-8 text-xl font-semibold z-10'>AFFORDABLE TOYS FOR YOUR FURRY FRIEND!</p>
             <Image
               src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-1.jpg?alt=media&token=3b9397dc-e813-4de8-9129-20baebc5005d'
               alt='cat toying'
@@ -182,6 +174,7 @@ export default function Home() {
             />
           </div>
           <div className='relative block'>
+            <p className='absolute bottom-40 left-1/4 text-2xl font-semibold text-white z-10'>STYLISH CLOTHES!</p>
             <Image
               src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-3.jpg?alt=media&token=97363b4b-6566-4905-a390-719e65859b66'
               alt='cat hoodie'
@@ -197,12 +190,12 @@ export default function Home() {
           <source src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/Cats_1.mp4?alt=media&token=7daa1613-2561-4b73-bfc6-5568a5b49860' type='video/mp4' />
         </video>
 
-        <div className='flex justify-around overflow-x-scroll'>
-          <div className='text-center h-52 w-52 border border-black'>INSTAGRAM</div>
-          <div className='text-center h-52 w-52 border border-black'>INSTAGRAM</div>
-          <div className='text-center h-52 w-52 border border-black'>INSTAGRAM</div>
-          <div className='text-center h-52 w-52 border border-black'>INSTAGRAM</div>
-          <div className='text-center h-52 w-52 border border-black'>INSTAGRAM</div>
+        <div className='flex justify-center gap-4 overflow-x-scroll'>
+          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
+          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
+          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
+          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
+          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
         </div>
       </main>
     </div>
