@@ -74,7 +74,7 @@ const Food = (props) => {
                                                 alt={product.Name}
                                                 height="100px"
                                                 width="100px"
-                                                quality={25}
+                                                quality={10}
                                                 placeholder="blur"
                                                 blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                                             />
