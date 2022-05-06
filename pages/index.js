@@ -40,7 +40,7 @@ export default function Home() {
       </Head>
       <main className=''>
         {/* TODO: Carousel with button */}
-        <div className='h-72 md:h-96 relative bg-center bg-cover'>
+        <div className='h-72 md:h-96 relative bg-center'>
           <Image
             src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-1.jpg?alt=media&token=ecb7123d-6f0a-46c1-ae4b-17756fc82213'
             alt="Cat Foods"
@@ -49,7 +49,6 @@ export default function Home() {
             quality={100}
             placeholder="blur"
             blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-            className='bg-center bg-cover'
           />
         </div>
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
@@ -59,21 +58,19 @@ export default function Home() {
             <div className='px-10 mt-8'>
               {/* TODO: get items most rated */}
               <h1 className='text-4xl'>Popular:</h1>
-              {/* BUG: images not full size */}
               <div className='mt-8 mb-16 mx-auto max-w-7xl flex gap-8 overflow-x-scroll snap-x'>
                 {products.map((product) => (
-                  <Link href={`food/${product.id}`} key={product.id}><a className='scroll-ml-4 snap-start grow'>
-                    <div className='relative min-w-[150px]'>
-                      <Image
-                        src={product.Image}
-                        alt="Food 1"
-                        height="256px"
-                        width="256px"
-                        placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                      />
-                      <div className='absolute top-2 left-2 bg-white border border-black p-1'>${product.Price}</div>
-                    </div>
+                  <Link href={`food/${product.id}`} key={product.id}><a className='scroll-ml-4 snap-start relative min-w-[150px] flex-none basis-[20%]'>
+                    <Image
+                      src={product.Image}
+                      alt="Food 1"
+                      height="256px"
+                      width="256px"
+                      quality={50}
+                      placeholder="blur"
+                      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                    />
+                    <div className='absolute top-2 left-2 bg-white border border-black p-1'>${product.Price}</div>
                   </a></Link>
                 ))}
               </div>
