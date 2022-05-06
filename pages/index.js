@@ -43,14 +43,6 @@ export default function Home() {
 
 
   useEffect(() => {
-    if (carouselNum % 3 == 0) {
-
-    } else if (carouselNum % 3 == 1) {
-
-    } else if (carouselNum % 3 == 2) {
-
-    }
-
     if (carouselNum === 0 || carouselNum === 1 || carouselNum === 2) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       if (carouselInterval === undefined) setCarouselInterval(setInterval(() => { setCarouselNum(carouselNum += 1); }, 5000));
@@ -130,9 +122,9 @@ export default function Home() {
             </div>
           </div>
           <div className='absolute bottom-4 mx-auto left-0 right-0 w-min flex'>
-            <button className='' onClick={() => scrollTo1()}><CircleIndicator className={(carouselNum % 3 === 0) ? "fill-black" : "fill-transparent"} /> </button>
-            <button className='' onClick={() => scrollTo2()}><CircleIndicator className={(carouselNum % 3 === 1) ? "fill-black" : "fill-transparent"} /></button>
-            <button className='' onClick={() => scrollTo0()}><CircleIndicator className={(carouselNum % 3 === 2) ? "fill-black" : "fill-transparent"} /></button>
+            <button className='' aria-label="Panel 1" onClick={() => scrollTo1()}><CircleIndicator className={(carouselNum % 3 === 0) ? "fill-black" : "fill-transparent" `hover:fill-black`} /> </button>
+            <button className='' aria-label="Panel 2" onClick={() => scrollTo2()}><CircleIndicator className={(carouselNum % 3 === 1) ? "fill-black" : "fill-transparent"} /></button>
+            <button className='' aria-label="Panel 3" onClick={() => scrollTo0()}><CircleIndicator className={(carouselNum % 3 === 2) ? "fill-black" : "fill-transparent"} /></button>
           </div>
         </div>
 
@@ -171,7 +163,7 @@ export default function Home() {
           <div className='relative block row-span-2 col-span-2'>
             <p className='absolute top-2 left-10 z-10'>o yea</p>
             <Image
-              src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-2.png?alt=media&token=1b8aa3a3-f1d9-4e68-8e6a-44fac39c4119'
+              src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-2.jpg?alt=media&token=2cce8815-efbb-4495-a27d-6d1e6052d4bf'
               alt='cat dressing'
               layout='fill'
               placeholder="blur"
@@ -201,7 +193,7 @@ export default function Home() {
           </div>
         </div>
 
-        <video className='my-16' autoPlay loop muted playsInline poster='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/vid1_poster.png?alt=media&token=143b8e45-9adc-43d2-9c9b-dc1745630242'>
+        <video className='my-16' autoPlay loop muted playsInline poster='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/vid1_poster.jpg?alt=media&token=37daec5d-85f0-460a-a173-60c9464e5fec'>
           <source src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/Cats_1.mp4?alt=media&token=7daa1613-2561-4b73-bfc6-5568a5b49860' type='video/mp4' />
         </video>
 
