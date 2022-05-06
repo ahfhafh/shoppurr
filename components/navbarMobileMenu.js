@@ -1,7 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { useState } from 'react';
+import CartIcon from '../public/images/cart-shopping.svg';
 
 const NavbarMobileMenu = (props) => {
     const [hideCartBtn, setHideCartBtn] = useState(false);
@@ -39,22 +38,22 @@ const NavbarMobileMenu = (props) => {
 
     return (
         <div className="flex w-10/12 left-1/2 -translate-x-1/2 h-16 fixed bottom-8">
-            <button className="grow bg-accent text-background2 font-indie text-3xl" onClick={() => { props.toggleSlideNav(); setHideCartBtn(!hideCartBtn);}}>{props.toggleState ? <>X</> : 'MENU'}</button>
+            <button className="grow bg-accent text-background2 font-indie text-3xl" onClick={() => { props.toggleSlideNav(); setHideCartBtn(!hideCartBtn); }}>{props.toggleState ? <>X</> : 'MENU'}</button>
             <motion.button
-                className={`w-16 pl-4 bg-accent2`}
+                className={`w-16 bg-accent2`}
                 key="cartBtn"
                 variants={cartBtnVariants}
                 animate={!hideCartBtn ? 'open' : 'closed'}
                 onClick={() => props.toggleCart()}
             >
                 <motion.span
-                    className={`fa-layers fa-fw fa-lg mt-1`}
+                    className={`fa-layers fa-lg mb-3 ml-3`}
                     key="cartBtnIcon"
                     variants={cartBtnIconVariants}
                     animate={!hideCartBtn ? 'open' : 'closed'}
                 >
-                    <FontAwesomeIcon icon={faCartShopping} className="text-2xl text-accent" />
-                    {props.cartItems > 0 && <span className="fa-layers-counter text-4xl" style={{ '--fa-counter-background-color': 'black', '--fa-right': '-10px', '--fa-top': '-10px' }}>{props.cartItems}</span>}
+                    <CartIcon className="fill-accent" />
+                    {props.cartItems > 0 && <span className="fa-layers-counter text-5xl" style={{ '--fa-counter-background-color': 'black', '--fa-right': '-25px', '--fa-top': '-5px' }}>{props.cartItems}</span>}
                 </motion.span>
             </motion.button>
         </div>
