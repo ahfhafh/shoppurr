@@ -6,6 +6,7 @@ import firebaseApp from '../firebase/app';
 import { collection, getDocs } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { shimmer, toBase64 } from '../utils/imageLoad';
+import { motion } from 'framer-motion';
 import Loader from '../public/images/loader.svg';
 import LeftArrow from '../public/images/left-arrow.svg';
 import RightArrow from '../public/images/right-arrow.svg';
@@ -38,7 +39,6 @@ export default function Home() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     setCarouselInterval(setInterval(() => { setCarouselNum(carouselNum += 1); }, 5000));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -57,9 +57,25 @@ export default function Home() {
   }
 
   const popularItems = useRef(null);
-  const carousel = useRef(null);
+  const carouselRef = useRef(null);
   function scrollRight(ref) { ref.current.scrollBy(500, 0); }
   function scrollLeft(ref) { ref.current.scrollBy(-500, 0); }
+
+  const [pointerX, setPointerX] = useState();
+
+  const carouselAttributes = {
+    ['drag']: "x",
+    ['onDragStart']: (event, info) => {
+      setPointerX(info.point.x);
+      clearInterval(carouselInterval);
+    },
+    ['onDragEnd']: (event, info) => {
+      if (info.point.x > pointerX + carouselRef.current.offsetWidth / 5) { scrollTo(carouselNum - 1); }
+      else if (info.point.x < pointerX - carouselRef.current.offsetWidth / 5) { scrollTo(carouselNum + 1); }
+      setCarouselInterval(setInterval(() => { setCarouselNum(carouselNum += 1); }, 5000));
+    },
+    ['dragSnapToOrigin']: true,
+  };
 
   return (
     <div>
@@ -69,9 +85,10 @@ export default function Home() {
       </Head>
       <main className='overflow-x-clip'>
 
+        {/* Carousel */}
         <div className='relative'>
-          <div className='relative h-72 md:h-96 w-full' ref={carousel}>
-            <div className={`absolute w-full h-full ${carouselNum % 3 == 0 ? 'right-0' : 'right-[-100vw]'}`}>
+          <div className='relative h-72 md:h-96 w-full' ref={carouselRef}>
+            <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3) * 100}vw` }}>
               <Image
                 src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-1.jpg?alt=media&token=ecb7123d-6f0a-46c1-ae4b-17756fc82213'
                 alt="Cat Foods"
@@ -81,9 +98,10 @@ export default function Home() {
                 quality={100}
                 placeholder="blur"
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                draggable={false}
               />
-            </div>
-            <div className={`absolute w-full h-full ${carouselNum % 3 == 1 ? 'right-0' : 'right-[-100vw]'}`}>
+            </motion.div>
+            <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3 - 1) * 100}vw` }}>
               <Image
                 src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-2.jpg?alt=media&token=0d6a52de-06a3-41a2-8f27-28fc73094804'
                 alt="Cat Foods"
@@ -93,9 +111,10 @@ export default function Home() {
                 quality={100}
                 placeholder="blur"
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                draggable={false}
               />
-            </div>
-            <div className={`absolute w-full h-full ${carouselNum % 3 == 2 ? 'right-0' : 'right-[-100vw]'}`}>
+            </motion.div>
+            <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3 - 2) * 100}vw` }}>
               <Image
                 src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-3.jpg?alt=media&token=5ceba167-bc8b-4e42-a61b-9c3d61ebb9d4'
                 alt="Cat Foods"
@@ -105,16 +124,23 @@ export default function Home() {
                 quality={100}
                 placeholder="blur"
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                draggable={false}
               />
-            </div>
+            </motion.div>
           </div>
           <div className='absolute bottom-4 mx-auto left-0 right-0 w-min flex'>
-            <button className='' aria-label="Panel 1" onClick={() => scrollTo(0)}><CircleIndicator className={`${(carouselNum % 3 === 0) ? "fill-accent" : "fill-transparent"}   hover:fill-accent`} /></button>
+            <motion.button
+              className=''
+              aria-label="Panel 1"
+              onClick={() => scrollTo(0)}>
+              <CircleIndicator className={`${(carouselNum % 3 === 0) ? "fill-accent" : "fill-transparent"} hover:fill-accent`} />
+            </motion.button>
             <button className='' aria-label="Panel 2" onClick={() => scrollTo(1)}><CircleIndicator className={`${(carouselNum % 3 === 1) ? "fill-accent" : "fill-transparent"}   hover:fill-accent`} /></button>
             <button className='' aria-label="Panel 3" onClick={() => scrollTo(2)}><CircleIndicator className={`${(carouselNum % 3 === 2) ? "fill-accent" : "fill-transparent"}   hover:fill-accent`} /></button>
           </div>
         </div>
 
+        {/* Slidder */}
         <div className='px-10 mt-8'>
           {/* TODO: get items most rated */}
           <h1 className='text-4xl'>Popular:</h1>
@@ -146,6 +172,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Grid */}
         <div className='grid grid-rows-3 md:grid-rows-2 md:grid-cols-3 grid-flow-col md:w-3/4 mx-auto border'>
           <div className='relative block md:row-span-2 col-span-2'>
             <div className='absolute bottom-40 left-10 z-10'>
@@ -185,10 +212,12 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Video */}
         <video className='my-16' autoPlay loop muted playsInline poster='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/vid1_poster.jpg?alt=media&token=37daec5d-85f0-460a-a173-60c9464e5fec'>
           <source src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/Cats_1.mp4?alt=media&token=7daa1613-2561-4b73-bfc6-5568a5b49860' type='video/mp4' />
         </video>
 
+        {/* INSTAGRAM */}
         <div className='flex justify-center gap-4 overflow-x-scroll'>
           <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
           <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
@@ -196,7 +225,7 @@ export default function Home() {
           <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
           <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
         </div>
-      </main>
-    </div>
+      </main >
+    </div >
   );
 }
