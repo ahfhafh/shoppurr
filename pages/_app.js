@@ -144,7 +144,6 @@ export default MyApp;
 
     // TODO: navbar: close slide after clicking link
     // TODO: navbar: box shadow
-    // TODO: navbar: mobile slide remove cart btn when empty
     // IMPLEMENT: mobile navbar: show/hide on scroll
     // IMPLEMENT: second font
     // IMPLEMENT: change currency
