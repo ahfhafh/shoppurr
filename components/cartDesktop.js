@@ -28,7 +28,7 @@ const CartDesktop = (props) => {
     }, [animateFinish]);
 
     return (
-        <motion.div className="z-40 w-full h-full absolute overflow-x-hidden"
+        <motion.div className="z-40 w-full h-full fixed overflow-x-hidden"
             onClick={closeModal}
             ref={modalRef}
             key="modalBackD"
@@ -36,7 +36,7 @@ const CartDesktop = (props) => {
             exit={{ backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: "blur(0px)" }}
             transition={{ duration: 0.5 }}
         >
-            <motion.div className="bg-background2 shadow-2xl absolute pt-20 right-0 w-[496px] h-full"
+            <motion.div className="bg-background2 shadow-2xl border-l absolute pt-20 right-0 w-[496px] h-full"
                 key="modalD"
                 initial={{ right: '-100vw' }}
                 animate={{ right: 0 }}
