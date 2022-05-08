@@ -33,5 +33,3 @@ const Navbar = (props) => {
 };
 
 export default Navbar;
-
-// TODO: change icons to svgs

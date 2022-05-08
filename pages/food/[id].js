@@ -133,4 +133,3 @@ export default Food;
 // TODO: better view of other pictures, better scroll
 // TODO: review, ratings, num of ratings
 // TODO?: add amount to cart
-// BUG: rating rendering above cart
