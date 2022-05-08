@@ -129,14 +129,9 @@ export default function Home() {
             </motion.div>
           </div>
           <div className='absolute bottom-4 mx-auto left-0 right-0 w-min flex'>
-            <motion.button
-              className=''
-              aria-label="Panel 1"
-              onClick={() => scrollTo(0)}>
-              <CircleIndicator className={`${(carouselNum % 3 === 0) ? "fill-accent" : "fill-transparent"} hover:fill-accent`} />
-            </motion.button>
-            <button className='' aria-label="Panel 2" onClick={() => scrollTo(1)}><CircleIndicator className={`${(carouselNum % 3 === 1) ? "fill-accent" : "fill-transparent"}   hover:fill-accent`} /></button>
-            <button className='' aria-label="Panel 3" onClick={() => scrollTo(2)}><CircleIndicator className={`${(carouselNum % 3 === 2) ? "fill-accent" : "fill-transparent"}   hover:fill-accent`} /></button>
+            <motion.button whileHover={{ fill: '#ff8e3c' }} animate={(carouselNum % 3 === 0) ? { fill: '#ff8e3c' } : { fill: '#00000050' }} transition={{ duration: 0.5 }} aria-label="Panel 1" onClick={() => scrollTo(0)}><CircleIndicator /></motion.button>
+            <motion.button whileHover={{ fill: '#ff8e3c' }} animate={(carouselNum % 3 === 1) ? { fill: '#ff8e3c' } : { fill: '#00000050' }} transition={{ duration: 0.5 }} aria-label="Panel 2" onClick={() => scrollTo(1)}><CircleIndicator /></motion.button>
+            <motion.button whileHover={{ fill: '#ff8e3c' }} animate={(carouselNum % 3 === 2) ? { fill: '#ff8e3c' } : { fill: '#00000050' }} transition={{ duration: 0.5 }} aria-label="Panel 3" onClick={() => scrollTo(2)}><CircleIndicator /></motion.button>
           </div>
         </div>
 
