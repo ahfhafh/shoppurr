@@ -14,7 +14,7 @@ const Navbar = (props) => {
     }, [props.useMediaQuery]);
 
     return (
-        <nav className="relative z-30">
+        <nav className="relative z-30 shadow-md">
             <div className="h-24 pt-2 md:px-12 md:pt-0 bg-background2 md:flex md:justify-between md:items-center">
                 <Link href='/'>
                     <a className="flex justify-center items-end">

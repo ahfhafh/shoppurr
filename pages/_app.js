@@ -143,7 +143,6 @@ export default MyApp;
 
 
     // TODO: navbar: close slide after clicking link
-    // TODO: navbar: box shadow
     // IMPLEMENT: mobile navbar: show/hide on scroll
     // IMPLEMENT: second font
     // IMPLEMENT: change currency
