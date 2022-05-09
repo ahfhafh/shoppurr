@@ -6,7 +6,7 @@ import firebaseApp from '../firebase/app';
 import { collection, getDocs } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { shimmer, toBase64 } from '../utils/imageLoad';
-import { motion, useElementScroll } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Loader from '../public/images/loader.svg';
 import LeftArrow from '../public/images/left-arrow.svg';
 import RightArrow from '../public/images/right-arrow.svg';
@@ -56,11 +56,7 @@ export default function Home() {
     setCarouselNum(n);
   }
 
-  const popularItems = useRef(null);
   const carouselRef = useRef(null);
-  function scrollRight(ref) { ref.current.scrollBy({ left: 500, behavior: 'smooth' }); }
-  function scrollLeft(ref) { ref.current.scrollBy({ left: -500, behavior: 'smooth' }); }
-
   const [pointerX, setPointerX] = useState();
 
   const carouselAttributes = {
@@ -76,6 +72,30 @@ export default function Home() {
     },
     ['dragSnapToOrigin']: true,
   };
+
+  const popularItemsRef = useRef(null);
+  const [viewLeft, setViewLeft] = useState(false);
+  const [viewRight, setViewRight] = useState(true);
+  const [popItemsScrollPos, setPopItemsScrollPos] = useState(0);
+  function scrollRight(ref) { ref.current.scrollBy({ left: 500, behavior: 'smooth' }); }
+  function scrollLeft(ref) { ref.current.scrollBy({ left: -500, behavior: 'smooth' }); }
+
+  useEffect(() => {
+    const clientWidth = popularItemsRef.current.clientWidth;
+    const scrollWidth = popularItemsRef.current.scrollWidth;
+    const scroll_Left = popularItemsRef.current.scrollLeft;
+    if (scroll_Left == 0) {
+      setViewRight(true);
+      setViewLeft(false);
+    } else if (scrollWidth - scroll_Left == clientWidth) {
+      setViewLeft(true);
+      setViewRight(false);
+    } else {
+      setViewLeft(true);
+      setViewRight(true);
+    }
+
+  }, [popItemsScrollPos]);
 
   return (
     <div>
@@ -136,17 +156,19 @@ export default function Home() {
         </div>
 
         {/* Slidder */}
-        <div className='px-10 mt-8'>
+        <div className='px-10 mt-20'>
           {/* TODO: get items most rated */}
-          <h1 className='text-4xl'>Popular:</h1>
+          <h1 className='text-4xl max-w-7xl mx-auto'>Popular:</h1>
           <div className='relative mt-8 mb-16 mx-auto max-w-7xl flex items-center border'>
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
             {loading && <Loader className='absolute left-1/2 -translate-x-1/2' />}
             {products && (
               <>
-                <LeftArrow className='absolute left-4 z-10' onClick={() => scrollLeft(popularItems)} role='button' />
-                <RightArrow className='absolute right-4 z-10' onClick={() => scrollRight(popularItems)} role='button' />
-                <div className=' pb-8 flex gap-8 overflow-x-scroll snap-x' ref={popularItems}>
+                <AnimatePresence>
+                  {viewLeft && <motion.div key={'leftArrow'} className='absolute z-10' initial={{ opacity: 0, left: -50 }} animate={{ opacity: 1, left: 16 }} exit={{ opacity: 0, left: -50 }}><LeftArrow className='fill-white' onClick={() => scrollLeft(popularItemsRef)} role='button' /></motion.div>}
+                  {viewRight && <motion.div key={'rightArrow'} className='absolute z-10' initial={{ opacity: 0, right: -50 }} animate={{ opacity: 1, right: 16 }} exit={{ opacity: 0, right: -50 }}><RightArrow className='fill-white' onClick={() => scrollRight(popularItemsRef)} role='button' /></motion.div>}
+                </AnimatePresence>
+                <div className=' pb-8 flex gap-8 overflow-x-scroll snap-x' ref={popularItemsRef} onScroll={() => setPopItemsScrollPos(popularItemsRef.current.scrollLeft)}>
                   {products.map((product) => (
                     <Link href={`food/${product.id}`} key={product.id}><a className='scroll-ml-4 snap-start relative min-w-[150px] flex-none basis-[20%]'>
                       <Image
@@ -168,11 +190,11 @@ export default function Home() {
         </div>
 
         {/* Grid */}
-        <div className='grid grid-rows-3 md:grid-rows-2 md:grid-cols-3 grid-flow-col md:w-3/4 mx-auto border'>
+        <div className='grid grid-rows-3 grid-cols-1 max-w-[550px] md:max-w-none md:grid-rows-2 md:grid-cols-3 grid-flow-col md:w-3/4 mx-auto border'>
           <div className='relative block md:row-span-2 col-span-2'>
-            <div className='absolute bottom-40 left-10 z-10'>
+            <div className='absolute bottom-8 md:bottom-32 left-10 z-10'>
               <p className='text-4xl font-extrabol'>BEAUTIFUL CAT CLOTHING!</p>
-              <Link href='/clothing'><a className=''>SHOP NOW {'>'}</a></Link>
+              <Link href='/clothing'><a className='hover:underline'>SHOP NOW {'>'}</a></Link>
             </div>
             <Image
               src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-2.jpg?alt=media&token=2cce8815-efbb-4495-a27d-6d1e6052d4bf'
@@ -182,8 +204,8 @@ export default function Home() {
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
             />
           </div>
-          <div className='relative block'>
-            <p className='absolute top-10 left-8 text-xl font-semibold z-10'>AFFORDABLE TOYS FOR YOUR FURRY FRIEND!</p>
+          <div className='relative block row-span-1 col-span-1'>
+            <button className='absolute bottom-16 right-0 text-2xl md:text-lg font-semibold text-white bg-accent p-3 z-10 hover:underline'>AFFORDABLE TOYS!</button>
             <Image
               src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-1.jpg?alt=media&token=3b9397dc-e813-4de8-9129-20baebc5005d'
               alt='cat toying'
@@ -194,8 +216,8 @@ export default function Home() {
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
             />
           </div>
-          <div className='relative block'>
-            <p className='absolute bottom-40 left-1/4 text-2xl font-semibold text-white z-10'>STYLISH CLOTHES!</p>
+          <div className='relative block row-span-1 col-span-1'>
+            <button className='absolute bottom-16 md:bottom-30 text-2xl md:text-lg font-semibold text-white bg-accent p-3 z-10 hover:underline'>STYLISH human CLOTHES!</button>
             <Image
               src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-3.jpg?alt=media&token=97363b4b-6566-4905-a390-719e65859b66'
               alt='cat hoodie'
