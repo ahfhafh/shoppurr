@@ -64,7 +64,8 @@ const Food = (props) => {
             {product && (
                 <div>
                     <div className='max-w-7xl mx-auto my-16 px-16 flex flex-col md:flex-row gap-8'>
-                        <div className='basis-3/5 flex gap-4 max-h-[500px] '>
+
+                        <div className='basis-3/5 flex gap-4 max-h-[500px] shrink-0'>
                             <div className='w-[110px] overflow-y-scroll overflow-x-hidden'>
                                 {Array.from(Array(6), (e, i) => {
                                     return (
