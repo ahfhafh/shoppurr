@@ -108,9 +108,9 @@ const Food = (props) => {
                             <button className='text-lg text-background2 bg-accent px-20 py-2 mt-8' onClick={() => addToCartHandler()}>Add To Cart</button>
 
                             <div className='mt-8'>
-                                <button className={`border-b-2 ${(tab < 1) ? 'border-b-black' : 'border-b-background'} w-1/3 text-center`} onClick={() => setTab(0)} disabled={tab === 0}>Description</button>
-                                <button className={`border-b-2 ${(tab === 1) ? 'border-b-black' : 'border-b-background'} w-1/3 text-center mb-4`} onClick={() => setTab(1)} disabled={tab === 1}>Shipping</button>
-                                <button className={`border-b-2 ${(tab > 1) ? 'border-b-black' : 'border-b-background'} w-1/3 text-center mb-4`} onClick={() => setTab(2)} disabled={tab === 2}>Returns</button>
+                                <button className={`border-b-2 ${(tab < 1) ? 'border-b-black' : 'border-b-slate-400'} w-1/3 text-center`} onClick={() => setTab(0)} disabled={tab === 0}>Description</button>
+                                <button className={`border-b-2 ${(tab === 1) ? 'border-b-black' : 'border-b-slate-400'} w-1/3 text-center mb-4`} onClick={() => setTab(1)} disabled={tab === 1}>Shipping</button>
+                                <button className={`border-b-2 ${(tab > 1) ? 'border-b-black' : 'border-b-slate-400'} w-1/3 text-center mb-4`} onClick={() => setTab(2)} disabled={tab === 2}>Returns</button>
 
                                 {renderTab()}
                             </div>
