@@ -57,7 +57,7 @@ const Food = () => {
                             <button>Top Rated</button>
                             <button>Newest</button>
                         </div>
-                        <div className='mt-8 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center'>
+                        <div className='mt-8 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center items-start'>
                             {products.map((product) => (
                                 <Link href={`food/${product.id}`} key={product.id}><a className='mb-16'>
                                     <Image
@@ -68,7 +68,7 @@ const Food = () => {
                                         placeholder="blur"
                                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                                     />
-                                    <div>{product.Name}</div>
+                                    <div className='max-w-64'>{product.Name}</div>
                                     <div>${product.Price}</div>
                                 </a></Link>
                             ))}
