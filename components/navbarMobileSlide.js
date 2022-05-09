@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { motion } from "framer-motion";
 
-const NavSlide = () => {
+const NavSlide = (props) => {
     return (
         <motion.div
             className="bg-accent w-10/12 left-1/2 -translate-x-1/2 h-0 fixed bottom-[95px]"
@@ -22,11 +22,9 @@ const NavSlide = () => {
                     </Link>
                 </li>
                 <li className="my-2">
-                    <Link href='/'>
-                        <a className="text-xl">
-                            Search
-                        </a>
-                    </Link>
+                    <a className="text-xl" onClick={() => props.toggleSearch()} >
+                        Search
+                    </a>
                 </li>
                 <li className="my-2">
                     <Link href='/food'>

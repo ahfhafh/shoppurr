@@ -23,9 +23,9 @@ const NavbarDesktopLinks = (props) => {
                     <UserIcon className="fill-accent" />
                 </a></Link>
 
-                <Link href='/'><a title="Search">
-                    <SearchIcon className="fill-accent" />
-                </a></Link>
+                <a title="Search">
+                    <SearchIcon className="fill-accent" onClick={() => props.toggleSearch()} />
+                </a>
 
                 <button onClick={() => props.toggleCart()}>
                     <span className="fa-layers fa-fw fa-lg mb-2" title="Cart">

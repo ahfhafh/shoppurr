@@ -1,6 +1,7 @@
 import NavSlide from "./navbarMobileSlide";
 import NavbarDesktopLinks from "./navbarDesktopLinks";
 import NavbarMobileMenu from "./navbarMobileMenu";
+import Search from '../components/search';
 import Link from 'next/link';
 import Logo from "../public/images/logo-dark.svg";
 import { useState, useEffect } from "react";
@@ -13,8 +14,15 @@ const Navbar = (props) => {
         (!props.useMediaQuery && setToggleSlideNav(false));
     }, [props.useMediaQuery]);
 
+    const [toggleSearch, setToggleSearch] = useState(false);
+
     return (
         <nav className="relative z-30 shadow-md">
+
+            <AnimatePresence>
+                {toggleSearch && <Search toggleSearch={() => setToggleSearch(false)} />}
+            </AnimatePresence>
+
             <div className="h-24 pt-2 md:px-12 md:pt-0 bg-background2 md:flex md:justify-between md:items-center">
                 <Link href='/'>
                     <a className="flex justify-center items-end">
@@ -22,11 +30,11 @@ const Navbar = (props) => {
                         <h1 className="font-indie text-accent text-5xl ml-2 mr-4 shrink-0 md:grow">Shop purr</h1>
                     </a>
                 </Link>
-                {!props.useMediaQuery && <NavbarDesktopLinks cartItems={props.cartItemsNum} toggleCart={() => props.toggleCart()} />}
+                {!props.useMediaQuery && <NavbarDesktopLinks cartItems={props.cartItemsNum} toggleCart={() => props.toggleCart()} toggleSearch={() => setToggleSearch(!toggleSearch)} />}
             </div>
             {props.useMediaQuery && <NavbarMobileMenu cartItems={props.cartItemsNum} toggleSlideNav={() => setToggleSlideNav(!toggleSlideNav)} toggleState={toggleSlideNav} toggleCart={() => props.toggleCart()} />}
             <AnimatePresence exitBeforeEnter>
-                {toggleSlideNav && <NavSlide />}
+                {toggleSlideNav && <NavSlide toggleSearch={() => setToggleSearch(!toggleSearch)} />}
             </AnimatePresence>
         </nav>
     );
