@@ -6,7 +6,7 @@ import firebaseApp from '../firebase/app';
 import { collection, getDocs } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { shimmer, toBase64 } from '../utils/imageLoad';
-import { motion } from 'framer-motion';
+import { motion, useElementScroll } from 'framer-motion';
 import Loader from '../public/images/loader.svg';
 import LeftArrow from '../public/images/left-arrow.svg';
 import RightArrow from '../public/images/right-arrow.svg';
@@ -58,8 +58,8 @@ export default function Home() {
 
   const popularItems = useRef(null);
   const carouselRef = useRef(null);
-  function scrollRight(ref) { ref.current.scrollBy(500, 0); }
-  function scrollLeft(ref) { ref.current.scrollBy(-500, 0); }
+  function scrollRight(ref) { ref.current.scrollBy({ left: 500, behavior: 'smooth' }); }
+  function scrollLeft(ref) { ref.current.scrollBy({ left: -500, behavior: 'smooth' }); }
 
   const [pointerX, setPointerX] = useState();
 
@@ -158,7 +158,7 @@ export default function Home() {
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                       />
-                      <div className='absolute top-2 left-2 bg-white border border-black p-1'>${product.Price}</div>
+                      <div className='absolute top-2 left-2 bg-accent border border-black p-1'>${product.Price}</div>
                     </a></Link>
                   ))}
                 </div>
