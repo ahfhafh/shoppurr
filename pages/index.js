@@ -108,7 +108,7 @@ export default function Home() {
         {/* Carousel */}
         <div className='relative'>
           <div className='relative h-72 md:h-96 w-full' ref={carouselRef}>
-            <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3) * 100}vw` }}>
+            <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3) * 100}vw` }} transition={{ type: 'tween' }}>
               <Image
                 src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-1.jpg?alt=media&token=ecb7123d-6f0a-46c1-ae4b-17756fc82213'
                 alt="Cat Foods"
@@ -121,7 +121,7 @@ export default function Home() {
                 draggable={false}
               />
             </motion.div>
-            <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3 - 1) * 100}vw` }}>
+            <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3 - 1) * 100}vw` }} transition={{ type: 'tween' }}>
               <Image
                 src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-2.jpg?alt=media&token=0d6a52de-06a3-41a2-8f27-28fc73094804'
                 alt="Cat Foods"
@@ -134,7 +134,7 @@ export default function Home() {
                 draggable={false}
               />
             </motion.div>
-            <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3 - 2) * 100}vw` }}>
+            <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3 - 2) * 100}vw` }} transition={{ type: 'tween' }}>
               <Image
                 src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-3.jpg?alt=media&token=5ceba167-bc8b-4e42-a61b-9c3d61ebb9d4'
                 alt="Cat Foods"
@@ -165,17 +165,17 @@ export default function Home() {
             {products && (
               <>
                 <AnimatePresence>
-                  {viewLeft && <motion.div key={'leftArrow'} className='absolute z-10' initial={{ opacity: 0, left: -50 }} animate={{ opacity: 1, left: 16 }} exit={{ opacity: 0, left: -50 }}><LeftArrow className='fill-white' onClick={() => scrollLeft(popularItemsRef)} role='button' /></motion.div>}
-                  {viewRight && <motion.div key={'rightArrow'} className='absolute z-10' initial={{ opacity: 0, right: -50 }} animate={{ opacity: 1, right: 16 }} exit={{ opacity: 0, right: -50 }}><RightArrow className='fill-white' onClick={() => scrollRight(popularItemsRef)} role='button' /></motion.div>}
+                  {viewLeft && <motion.div key={'leftArrow'} className='absolute z-10 hover:scale-105' initial={{ opacity: 0, left: -50 }} animate={{ opacity: 1, left: 16 }} exit={{ opacity: 0, left: -50 }}><LeftArrow className='fill-white' onClick={() => scrollLeft(popularItemsRef)} role='button' /></motion.div>}
+                  {viewRight && <motion.div key={'rightArrow'} className='absolute z-10 hover:scale-105' initial={{ opacity: 0, right: -50 }} animate={{ opacity: 1, right: 16 }} exit={{ opacity: 0, right: -50 }}><RightArrow className='fill-white' onClick={() => scrollRight(popularItemsRef)} role='button' /></motion.div>}
                 </AnimatePresence>
-                <div className=' pb-8 flex gap-8 overflow-x-scroll snap-x' ref={popularItemsRef} onScroll={() => setPopItemsScrollPos(popularItemsRef.current.scrollLeft)}>
+                <div className='pb-8 flex gap-8 overflow-x-scroll snap-x w-full' ref={popularItemsRef} onScroll={() => setPopItemsScrollPos(popularItemsRef.current.scrollLeft)}>
                   {products.map((product) => (
-                    <Link href={`food/${product.id}`} key={product.id}><a className='scroll-ml-4 snap-start relative min-w-[150px] flex-none basis-[20%]'>
+                    <Link href={`food/${product.id}`} key={product.id}><a className='scroll-ml-4 snap-start relative min-w-[150px] min-h-[150px] h-[256px] flex-none basis-[20%]'>
                       <Image
                         src={product.Image}
                         alt="Food 1"
-                        height="256px"
-                        width="256px"
+                        layout='fill'
+                        objectFit='contain'
                         quality={50}
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
