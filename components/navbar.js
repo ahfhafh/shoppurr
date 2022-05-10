@@ -16,6 +16,15 @@ const Navbar = (props) => {
 
     const [toggleSearch, setToggleSearch] = useState(false);
 
+    /* Prevent the user from scrolling when the cart is open. */
+    useEffect(() => {
+        if (toggleSearch) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+    }, [toggleSearch]);
+
     return (
         <nav className="relative z-30 shadow-md">
 
