@@ -47,7 +47,7 @@ const Clothing = () => {
                             blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                             className='bg-center bg-cover'
                         />
-                        <h1 className='absolute w-full text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-extrabold'>Cat Food</h1>
+                        <h1 className='absolute w-full text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-extrabold'>Cat Clothing</h1>
                     </div>
                     <div className='px-10'>
                         <div className='md:sticky md:top-8 mt-10 w-52 md:float-left flex flex-col items-start'>
