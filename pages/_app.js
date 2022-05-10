@@ -118,7 +118,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <div style={{ 'minHeight': 'calc(100vh - 200px)' }}>
+      <div className="bg-background" style={{ 'minHeight': 'calc(100vh - 200px)' }}>
         <Cart
           useMediaQuery={useMediaQuery(MOBILE_WINDOW)}
           cartState={toggleCart}

@@ -11,7 +11,7 @@ class MyDocument extends Document {
           <link rel="shortcut icon" href="/images/cat_butt.ico" type="image/x-icon" />
           <link rel="icon" href="/images/cat_butt.ico" type="image/x-icon" />
         </Head>
-        <body className='bg-background'>
+        <body className='bg-gradient-to-b from-[#ffc292] via-[#ff9d9d] to-[#fda6ff] max-w-screen-2xl  mx-auto'>
           <Main />
           <NextScript />
         </body>
