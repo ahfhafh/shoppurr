@@ -11,6 +11,12 @@ import Loader from '../public/images/loader.svg';
 import LeftArrow from '../public/images/left-arrow.svg';
 import RightArrow from '../public/images/right-arrow.svg';
 import CircleIndicator from '../public/images/circle.svg';
+import main_cat_1 from '/public/images/main-cat-1.jpg';
+import main_cat_2 from '/public/images/main-cat-2.jpg';
+import main_cat_3 from '/public/images/main-cat-3.jpg';
+import sub_head_2 from '/public/images/sub-head-2.jpg';
+import sub_head_1 from '/public/images/sub-head-1.jpg';
+import sub_head_3 from '/public/images/sub-head-3.jpg';
 
 export default function Home() {
 
@@ -110,7 +116,7 @@ export default function Home() {
           <div className='relative h-72 md:h-96 w-full' ref={carouselRef}>
             <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3) * 100}vw` }} transition={{ type: 'tween' }}>
               <Image
-                src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-1.jpg?alt=media&token=ecb7123d-6f0a-46c1-ae4b-17756fc82213'
+                src={main_cat_1}
                 alt="Cat Foods"
                 layout='fill'
                 objectFit='cover'
@@ -123,7 +129,7 @@ export default function Home() {
             </motion.div>
             <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3 - 1) * 100}vw` }} transition={{ type: 'tween' }}>
               <Image
-                src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-2.jpg?alt=media&token=0d6a52de-06a3-41a2-8f27-28fc73094804'
+                src={main_cat_2}
                 alt="Cat Foods"
                 layout='fill'
                 objectFit='cover'
@@ -136,7 +142,7 @@ export default function Home() {
             </motion.div>
             <motion.div {...carouselAttributes} className={`absolute w-full h-full`} animate={{ right: `${(carouselNum % 3 - 2) * 100}vw` }} transition={{ type: 'tween' }}>
               <Image
-                src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/main-cat-toys-3.jpg?alt=media&token=5ceba167-bc8b-4e42-a61b-9c3d61ebb9d4'
+                src={main_cat_3}
                 alt="Cat Foods"
                 layout='fill'
                 objectFit='cover'
@@ -197,7 +203,7 @@ export default function Home() {
               <Link href='/clothing'><a className='hover:underline'>SHOP NOW {'>'}</a></Link>
             </div>
             <Image
-              src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-2.jpg?alt=media&token=2cce8815-efbb-4495-a27d-6d1e6052d4bf'
+              src={sub_head_2}
               alt='cat dressing'
               layout='fill'
               placeholder="blur"
@@ -207,7 +213,7 @@ export default function Home() {
           <div className='relative block row-span-1 col-span-1'>
             <button className='absolute bottom-16 right-0 text-2xl md:text-lg font-semibold text-white bg-accent p-3 z-10 hover:underline'>AFFORDABLE TOYS!</button>
             <Image
-              src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-1.jpg?alt=media&token=3b9397dc-e813-4de8-9129-20baebc5005d'
+              src={sub_head_1}
               alt='cat toying'
               height='550px'
               width='550px'
@@ -219,7 +225,7 @@ export default function Home() {
           <div className='relative block row-span-1 col-span-1'>
             <button className='absolute bottom-16 md:bottom-30 text-2xl md:text-lg font-semibold text-white bg-accent p-3 z-10 hover:underline'>STYLISH human CLOTHES!</button>
             <Image
-              src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/sub-head-3.jpg?alt=media&token=97363b4b-6566-4905-a390-719e65859b66'
+              src={sub_head_3}
               alt='cat hoodie'
               layout='fill'
               objectFit='cover'
@@ -230,8 +236,8 @@ export default function Home() {
         </div>
 
         {/* Video */}
-        <video className='my-16' autoPlay loop muted playsInline poster='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/vid1_poster.jpg?alt=media&token=37daec5d-85f0-460a-a173-60c9464e5fec'>
-          <source src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/Cats_1.mp4?alt=media&token=7daa1613-2561-4b73-bfc6-5568a5b49860' type='video/mp4' />
+        <video className='my-16' autoPlay loop muted playsInline poster='/images/vid1_poster.jpg'>
+          <source src='/videos/Cats_1.mp4' type='video/mp4' />
         </video>
 
         {/* INSTAGRAM */}

@@ -6,6 +6,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { shimmer, toBase64 } from '../../utils/imageLoad';
 import Loader from '../../public/images/loader.svg';
+import food_header from '/public/images/food_header.jpg';
 
 const Clothing = () => {
 
@@ -38,7 +39,7 @@ const Clothing = () => {
                 <>
                     <div className='h-72 md:h-96 relative bg-center bg-cover'>
                         <Image
-                            src='https://firebasestorage.googleapis.com/v0/b/shop-purr.appspot.com/o/food_header.jpg?alt=media&token=5e4fb3a9-c935-4afb-a82e-7401cd877bff'
+                            src={food_header}
                             alt="Cat Clothing"
                             layout='fill'
                             objectFit='cover'
