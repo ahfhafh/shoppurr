@@ -62,7 +62,7 @@ const Food = () => {
                                 <Link href={`food/${product.id}`} key={product.id}><a className='mb-16'>
                                     <Image
                                         src={product.Image}
-                                        alt="Food 1"
+                                        alt={`Food ${product.name}`}
                                         height="256px"
                                         width="256px"
                                         placeholder="blur"
