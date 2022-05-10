@@ -23,7 +23,7 @@ const NavbarDesktopLinks = (props) => {
                     <UserIcon className="fill-accent" />
                 </a></Link>
 
-                <a title="Search">
+                <a title="Search" role="button">
                     <SearchIcon className="fill-accent" onClick={() => props.toggleSearch()} />
                 </a>
 
