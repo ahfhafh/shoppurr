@@ -51,14 +51,18 @@ const CartDesktop = (props) => {
                                 props.cartItems.map((item, i) =>
                                     <motion.li key={item.id} className='my-2 mx-8 flex items-center' layout exit={{ translateX: 500 }} transition={{ duration: 0.5, type: "tween" }}>
                                         <button className="" onClick={() => props.removeCartItem(i)}>X</button>
-                                        <Image
-                                            src={item.Image}
-                                            alt={item.Name}
-                                            width='128px'
-                                            height='128px'
-                                        />
-                                        <div className="grow text-left">
-                                            <p className="font-medium">{item.Name}</p>
+                                        <div className="shrink-0">
+                                            <Image
+                                                src={item.Image}
+                                                alt={item.Name}
+                                                width='100px'
+                                                height='100px'
+                                            />
+                                        </div>
+                                        <div className="grow text-left mr-2">
+                                            <Link href={`/${item.category}/${item.id}`}><a>
+                                                <p className="font-medium text-md overflow-hidden text-ellipsis hover:underline" style={{ 'display': '-webkit-box', 'WebkitLineClamp': 2, 'WebkitBoxOrient': 'vertical' }} title={item.Name}>{item.Name}</p>
+                                            </a></Link>
                                             <p className="text-sm">{`$${item.Price}`}</p>
                                         </div>
                                         <div className="flex items-center">
@@ -72,15 +76,15 @@ const CartDesktop = (props) => {
                         </AnimatePresence>
                     </ul>
                     <AnimatePresence>
-                    {cartEmpty && animateFinish ?
-                        <motion.p key={'NoItems'} className="absolute text-center" animate={{ top: 160 }}>No items in cart</motion.p>
-                        : <motion.div key={'CheckoutBtn'} className="mt-4 mb-8 w-full" exit={{ translateY: 100 }}>
-                            <p className="text-center mb-2">subtotal: </p>
-                            <Link href='/'>
-                                <a className="block bg-accent text-background2 text-center text-xl w-10/12 mx-auto rounded-lg py-3" onClick={() => props.toggleCart()}>Checkout</a>
-                            </Link>
-                        </motion.div>
-                    }
+                        {cartEmpty && animateFinish ?
+                            <motion.p key={'NoItems'} className="absolute text-center" animate={{ top: 160 }}>No items in cart</motion.p>
+                            : <motion.div key={'CheckoutBtn'} className="mt-4 mb-8 w-full" exit={{ translateY: 100 }}>
+                                <p className="text-center mb-2">subtotal: </p>
+                                <Link href='/'>
+                                    <a className="block bg-accent text-background2 text-center text-xl w-10/12 mx-auto rounded-lg py-3" onClick={() => props.toggleCart()}>Checkout</a>
+                                </Link>
+                            </motion.div>
+                        }
                     </AnimatePresence>
                 </div>
             </motion.div>

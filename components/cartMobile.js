@@ -60,8 +60,8 @@ const CartMobile = (props) => {
                                             />
                                         </div>
                                         <div className="grow text-left mr-2">
-                                            <Link href={`${item.category}/${item.id}`}><a>
-                                                <p className="font-medium text-sm overflow-hidden text-ellipsis" style={{ 'display': '-webkit-box', 'WebkitLineClamp': 3, 'WebkitBoxOrient': 'vertical' }} title={item.Name}>{item.Name}</p>
+                                            <Link href={`/${item.category}/${item.id}`}><a>
+                                                <p className="font-medium text-sm overflow-hidden text-ellipsis hover:underline" style={{ 'display': '-webkit-box', 'WebkitLineClamp': 3, 'WebkitBoxOrient': 'vertical' }} title={item.Name}>{item.Name}</p>
                                             </a></Link>
                                             <p className="text-sm">{`$${item.Price}`}</p>
                                         </div>
@@ -93,5 +93,3 @@ const CartMobile = (props) => {
 };
 
 export default CartMobile;
-
-// BUG: link to item on same page
