@@ -28,7 +28,7 @@ const CartDesktop = (props) => {
     }, [animateFinish]);
 
     return (
-        <motion.div className="z-40 w-full h-full fixed overflow-x-hidden"
+        <motion.div className="z-40 w-full h-full left-0 fixed overflow-x-hidden"
             onClick={closeModal}
             ref={modalRef}
             key="modalBackD"
