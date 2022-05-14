@@ -176,7 +176,7 @@ export default function Home() {
                 </AnimatePresence>
                 <div className='pb-8 flex gap-8 overflow-x-scroll snap-x w-full' ref={popularItemsRef} onScroll={() => setPopItemsScrollPos(popularItemsRef.current.scrollLeft)}>
                   {products.map((product) => (
-                    <Link href={`food/${product.id}`} key={product.id}><a className='scroll-ml-4 snap-start relative min-w-[150px] min-h-[150px] h-[256px] flex-none basis-[20%]'>
+                    <Link href={`Foods/${product.id}`} key={product.id}><a className='scroll-ml-4 snap-start relative min-w-[150px] min-h-[150px] h-[256px] flex-none basis-[20%]'>
                       <Image
                         src={product.Image}
                         alt="Food 1"

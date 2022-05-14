@@ -27,21 +27,21 @@ const NavSlide = (props) => {
                     </a>
                 </li>
                 <li className="my-2">
-                    <Link href='/food'>
+                    <Link href='/Foods'>
                         <a className="text-xl">
                             Food
                         </a>
                     </Link>
                 </li>
                 <li className="my-2">
-                    <Link href='/toys'>
+                    <Link href='/Toys'>
                         <a className="text-xl">
                             Toys
                         </a>
                     </Link>
                 </li>
                 <li className="my-2">
-                    <Link href='/clothing'>
+                    <Link href='/Clothing'>
                         <a className="text-xl">
                             Clothing
                         </a>

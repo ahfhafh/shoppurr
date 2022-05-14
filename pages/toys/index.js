@@ -61,7 +61,7 @@ const Toy = () => {
                         <div className='mt-8 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center items-start'>
                             {products.map((product) => (
                                 <div key={product.id} className='w-full h-[256px] mb-36'>
-                                    <Link href={`toys/${product.id}`} ><a>
+                                    <Link href={`Toys/${product.id}`} ><a>
                                         <div className='relative w-full h-full'>
                                             <Image
                                                 src={product.Image}

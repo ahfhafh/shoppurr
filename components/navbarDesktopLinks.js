@@ -7,13 +7,13 @@ const NavbarDesktopLinks = (props) => {
     return (
         <>
             <div className='flex flex-wrap justify-center'>
-                <Link href='/food'>
+                <Link href='/Foods'>
                     <a className='font-indie text-accent text-xl mx-4'>FOOD</a>
                 </Link>
-                <Link href='/toys'>
+                <Link href='/Toys'>
                     <a className='font-indie text-accent text-xl mx-4'>TOYS</a>
                 </Link>
-                <Link href='/clothing'>
+                <Link href='/Clothing'>
                     <a className='font-indie text-accent text-xl mx-4'>CLOTHING</a>
                 </Link>
             </div>
