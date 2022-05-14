@@ -37,7 +37,7 @@ const Food = () => {
             {loading && <Loader className='absolute top-1/2 left-1/2 -translate-x-1/2' />}
             {products && (
                 <>
-                    <div className='h-72 md:h-96 relative bg-center bg-cover'>
+                    <div className='h-72 md:h-96 relative'>
                         <Image
                             src={food_header}
                             alt="Cat Foods"
@@ -46,7 +46,6 @@ const Food = () => {
                             quality={100}
                             placeholder="blur"
                             blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                            className='bg-center bg-cover'
                         />
                         <h1 className='absolute w-full text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-extrabold'>Cat Food</h1>
                     </div>
@@ -60,18 +59,22 @@ const Food = () => {
                         </div>
                         <div className='mt-8 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center items-start'>
                             {products.map((product) => (
-                                <Link href={`food/${product.id}`} key={product.id}><a className='mb-16'>
-                                    <Image
-                                        src={product.Image}
-                                        alt={`Food ${product.name}`}
-                                        height="256px"
-                                        width="256px"
-                                        placeholder="blur"
-                                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                    />
-                                    <div className='max-w-64'>{product.Name}</div>
-                                    <div>${product.Price}</div>
-                                </a></Link>
+                                <div key={product.id} className='w-full h-[256px] mb-36'>
+                                    <Link href={`food/${product.id}`} ><a>
+                                        <div className='relative w-full h-full'>
+                                            <Image
+                                                src={product.Image}
+                                                alt={`Food ${product.Name}`}
+                                                layout='fill'
+                                                objectFit='contain'
+                                                placeholder="blur"
+                                                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                            />
+                                        </div>
+                                        <div className='overflow-hidden text-ellipsis' style={{ 'display': '-webkit-box', 'WebkitLineClamp': 3, 'WebkitBoxOrient': 'vertical' }} title={product.Name}>{product.Name}</div>
+                                        <div className=''>${product.Price}</div>
+                                    </a></Link>
+                                </div>
                             ))}
                         </div>
                     </div>

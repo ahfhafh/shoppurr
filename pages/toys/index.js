@@ -60,18 +60,22 @@ const Toy = () => {
                         </div>
                         <div className='mt-8 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center items-start'>
                             {products.map((product) => (
-                                <Link href={`toys/${product.id}`} key={product.id}><a className='mb-16'>
-                                    <Image
-                                        src={product.Image}
-                                        alt={`Toy ${product.name}`}
-                                        height="256px"
-                                        width="256px"
-                                        placeholder="blur"
-                                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                    />
-                                    <div className='max-w-64'>{product.Name}</div>
-                                    <div>${product.Price}</div>
-                                </a></Link>
+                                <div key={product.id} className='w-full h-[256px] mb-36'>
+                                    <Link href={`toys/${product.id}`} ><a>
+                                        <div className='relative w-full h-full'>
+                                            <Image
+                                                src={product.Image}
+                                                alt={`Toy ${product.Name}`}
+                                                layout='fill'
+                                                objectFit='contain'
+                                                placeholder="blur"
+                                                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                            />
+                                        </div>
+                                        <div className='overflow-hidden text-ellipsis' style={{ 'display': '-webkit-box', 'WebkitLineClamp': 3, 'WebkitBoxOrient': 'vertical' }} title={product.Name}>{product.Name}</div>
+                                        <div>${product.Price}</div>
+                                    </a></Link>
+                                </div>
                             ))}
                         </div>
                     </div>
