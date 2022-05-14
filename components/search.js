@@ -11,8 +11,7 @@ const searchClient = algoliasearch(
 function Hit({ hit }) {
     return (
         <div>
-            {/* <img src={props.hit.image} align="left" alt={props.hit.name} /> */}
-            <Link href={`food/${hit.objectID}`}><a>{hit.Name}</a></Link>
+            <Link href={`/${hit.path}`}><a>{hit.Name}</a></Link>
         </div>
     );
 }
@@ -41,4 +40,3 @@ export default Search;
 // TODO: search general
 // TODO: close search after
 // TODO: search multiple collections
-// BUG: href to same page
