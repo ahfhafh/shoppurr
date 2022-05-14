@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import firebaseApp from '../../firebase/app';
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc, collection, getDocs } from "firebase/firestore";
 import { shimmer, toBase64 } from '../../utils/imageLoad';
 import Loader from '../../public/images/loader.svg';
 import Star_template from '../../public/images/star_template.svg';
@@ -20,6 +20,10 @@ const Food = (props) => {
     const [loading, setLoading] = useState(false);
     const [tab, setTab] = useState(0);
 
+    const [reviews, setReviews] = useState([]);
+    const [reviewsErr, setReviewsErr] = useState('');
+    const [reviewsLoading, setReviewsLoading] = useState(false);
+
     useEffect(() => {
         if (!router.isReady) return;
 
@@ -34,6 +38,18 @@ const Food = (props) => {
             setLoading(false);
         }
         getProduct();
+
+        async function getReviews() {
+            setReviewsLoading(true);
+            await getDocs(collection(db, 'Foods', id, 'Reviews')).then((snapshot) => {
+                setReviews(snapshot.docs.map((review) => ({ ...review.data(), id: review.id })));
+            }).catch((err) => {
+                setReviewsErr(err);
+                console.log(err);
+            });
+            setReviewsLoading(false);
+        }
+        getReviews();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router]);
 
@@ -148,7 +164,18 @@ const Food = (props) => {
                         }
                         <p className='text-2xl'>Reviews:</p>
 
-                        <div>Review 1</div>
+                        {reviewsErr && <strong>Error: {JSON.stringify(reviewsErr)}</strong>}
+                        {reviewsLoading && <Loader className='' />}
+                        {reviews &&
+                            <ul>
+                                {reviews.map((review) => (
+                                    <li key={review.id}>
+                                        <h1>{review.Title}</h1>
+                                        <p>{review.Feedback}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        }
                     </div>
                 </div>
             )}
