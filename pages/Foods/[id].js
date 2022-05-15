@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import firebaseApp from '../../firebase/app';
-import { getFirestore, doc, getDoc, setDoc, collection, getDocs } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, getDocs, addDoc } from "firebase/firestore";
 import { shimmer, toBase64 } from '../../utils/imageLoad';
 import Loader from '../../public/images/loader.svg';
 import Star_template from '../../public/images/star_template.svg';
@@ -76,11 +76,11 @@ const Food = (props) => {
     const [reviewOpen, setReviewOpen] = useState(false);
     const [reviewTitle, setReviewTitle] = useState('');
     const [reviewFeedback, setReviewFeedback] = useState('');
+
     async function handleReviewSubmit(e) {
-        e.preventDefault();
         console.log(reviewTitle);
         console.log(reviewFeedback);
-        await setDoc(doc(db, "Foods", id, 'Reviews'), {
+        await addDoc(collection(doc(db, 'Foods', id), 'Reviews'), {
             Title: reviewTitle,
             Feedback: reviewFeedback,
         });
@@ -105,9 +105,6 @@ const Food = (props) => {
                                     placeholder="blur"
                                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                                 />
-                                        </button>
-                                    );
-                                })}
                             </div>
                             <div className='w-full md:w-24 h-[150px] md:h-full flex md:inline overflow-x-scroll md:overflow-y-scroll md:overflow-x-hidden'>
                                 {Array.from(Array(6), (e, i) => {
@@ -151,16 +148,16 @@ const Food = (props) => {
 
                         </div>
                     </div>
-                    <div className='mt-16 mx-28'>
-                        <button className='float-right rounded-sm bg-accent2 py-2 px-4 text-white' onClick={() => setReviewOpen(!reviewOpen)}>Add Review</button>
+                    <div className='mt-16 mx-8 md:mx-28'>
+                        <button className='mb-2 float-right rounded-sm bg-accent2 py-2 px-4 text-white' onClick={() => setReviewOpen(!reviewOpen)}>Add Review</button>
                         {reviewOpen &&
                             <div className='mt-20 clear-right border-2 border-gray-400 p-4'>
                                 <h1>Submit a review:</h1>
                                 <form onSubmit={e => { handleReviewSubmit(e); }}>
                                     <label>Review:*</label><br />
-                                    <textarea className='' name='feedback' type='text' cols='100' value={reviewFeedback} onChange={(e) => setReviewFeedback(e.target.value)} required></textarea><br />
+                                    <textarea className='w-full' style={{ WebkitBoxSizing: 'border-box', boxSizing: 'border-box' }} name='feedback' type='text' value={reviewFeedback} onChange={(e) => setReviewFeedback(e.target.value)} required></textarea><br />
                                     <label>Title:*</label><br />
-                                    <input name='title' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)} required></input><br />
+                                    <input className='w-full' name='title' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)} required></input><br />
                                     <button className='rounded-sm bg-accent2 py-2 px-4 mt-4' type='submit'>Submit review</button>
                                 </form>
                             </div>
@@ -170,10 +167,10 @@ const Food = (props) => {
                         {reviewsErr && <strong>Error: {JSON.stringify(reviewsErr)}</strong>}
                         {reviewsLoading && <Loader className='' />}
                         {reviews &&
-                            <ul>
+                            <ul className='px-4 py-8'>
                                 {reviews.map((review) => (
-                                    <li key={review.id}>
-                                        <h1>{review.Title}</h1>
+                                    <li key={review.id} className='border p-4'>
+                                        <h1 className='text-xl'>{review.Title}</h1>
                                         <p>{review.Feedback}</p>
                                     </li>
                                 ))}
