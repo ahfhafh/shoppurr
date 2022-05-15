@@ -93,18 +93,31 @@ const Food = (props) => {
             {loading && <Loader className='absolute top-1/2 bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' />}
             {product && (
                 <div>
-                    <div className='max-w-7xl mx-auto my-16 px-16 flex flex-col md:flex-row gap-8'>
+                    <div className='max-w-7xl mx-auto my-16 px-8 md:px-16 flex flex-col md:flex-row gap-8'>
 
-                        <div className='basis-3/5 flex gap-4 max-h-[500px] shrink-0'>
-                            <div className='w-[110px] overflow-y-scroll overflow-x-hidden'>
+                        <div className='basis-3/5 flex flex-col md:flex-row gap-4 max-h-[500px] shrink-0 items-center'>
+                            <div className='grow w-[500px] md:w-auto h-[500px] relative md:order-last'>
+                                <Image
+                                    src={product.Image}
+                                    alt={product.Name}
+                                    layout='fill'
+                                    objectFit='contain'
+                                    placeholder="blur"
+                                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                />
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                            <div className='w-full md:w-24 h-[150px] md:h-full flex md:inline overflow-x-scroll md:overflow-y-scroll md:overflow-x-hidden'>
                                 {Array.from(Array(6), (e, i) => {
                                     return (
-                                        <button key={i}>
+                                        <button key={i} className='relative w-20 h-20 flex-none md:mb-5'>
                                             <Image
                                                 src={product.Image}
                                                 alt={product.Name}
-                                                height="100px"
-                                                width="100px"
+                                                layout='fill'
+                                                objectFit='contain'
                                                 quality={10}
                                                 placeholder="blur"
                                                 blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
@@ -112,16 +125,6 @@ const Food = (props) => {
                                         </button>
                                     );
                                 })}
-                            </div>
-                            <div>
-                                <Image
-                                    src={product.Image}
-                                    alt={product.Name}
-                                    height="500px"
-                                    width="500px"
-                                    placeholder="blur"
-                                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                />
                             </div>
                         </div>
 
