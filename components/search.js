@@ -22,7 +22,7 @@ const Search = (props) => {
             animate={{ backgroundColor: 'rgba(50, 50, 50, 0.75)', backdropFilter: "blur(8px)" }}
             exit={{ backgroundColor: 'rgba(0, 0, 0, 0)', backdropFilter: "blur(0px)" }}
         >
-            <motion.div className="w-3/4 md:w-1/2 mx-auto mt-[10%]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <motion.div className="w-3/4 md:w-1/2 mx-auto mt-[25%] md:mt-[10%]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                 <InstantSearch indexName="dev_Foods" searchClient={searchClient}>
                     <SearchBox classNames={{ form: 'flex', input: 'text-xl py-1 pl-2 rounded-md grow', submitIcon: 'ml-2 w-[24px] h-[24px] translate-y-1', resetIcon: 'hidden' }} />
                     <Hits hitComponent={Hit} classNames={{ list: 'bg-background2 rounded-md mt-2 p-4', item: 'border-t first:border-none py-2' }} />
