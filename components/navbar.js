@@ -3,6 +3,7 @@ import NavbarDesktopLinks from "./navbarDesktopLinks";
 import NavbarMobileMenu from "./navbarMobileMenu";
 import Search from '../components/search';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Logo from "../public/images/logo-dark.svg";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
@@ -24,6 +25,24 @@ const Navbar = (props) => {
             document.body.style.overflow = "auto";
         }
     }, [toggleSearch]);
+
+
+    const router = useRouter();
+
+    useEffect(() => {
+        const handleRouteChange = () => {
+            setToggleSearch(false);
+        };
+
+        router.events.on('routeChangeStart', handleRouteChange);
+
+        // If the component is unmounted, unsubscribe
+        // from the event with the `off` method:
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChange);
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <nav className="relative z-30 shadow-md">
