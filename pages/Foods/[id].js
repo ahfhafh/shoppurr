@@ -109,7 +109,7 @@ const Food = (props) => {
                                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                                 />
                             </div>
-                            <div className='w-full md:w-24 h-[150px] md:h-full flex md:inline overflow-x-scroll md:overflow-y-scroll md:overflow-x-hidden'>
+                            <div className='w-full md:w-24 h-[150px] md:h-full flex justify-center md:inline overflow-x-scroll md:overflow-y-scroll md:overflow-x-hidden'>
                                 {Array.from(Array(6), (e, i) => {
                                     return (
                                         <button key={i} className='relative w-20 h-20 flex-none md:mb-5'>
