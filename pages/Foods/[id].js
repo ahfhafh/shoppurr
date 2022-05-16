@@ -3,11 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import firebaseApp from '../../firebase/app';
-import { getFirestore, doc, getDoc, collection, getDocs, addDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, getDocs, addDoc, serverTimestamp, toDate } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 import { shimmer, toBase64 } from '../../utils/imageLoad';
 import Loader from '../../public/images/loader.svg';
 import Star_template from '../../public/images/star_template.svg';
+import Star from '../../public/images/star.svg';
+import Rating from 'react-rating';
 
 const Food = (props) => {
 
@@ -75,20 +77,28 @@ const Food = (props) => {
     }
 
     const [reviewOpen, setReviewOpen] = useState(false);
+    const [reviewRating, setReviewRating] = useState(0);
     const [reviewTitle, setReviewTitle] = useState('');
     const [reviewFeedback, setReviewFeedback] = useState('');
 
     async function handleReviewSubmit(e) {
-        console.log(reviewTitle);
-        console.log(reviewFeedback);
+        e.preventDefault();
         await addDoc(collection(doc(db, 'Foods', id), 'Reviews'), {
             Title: reviewTitle,
             Feedback: reviewFeedback,
+            Rating: reviewRating,
+            Created: serverTimestamp(),
         });
+        router.reload(window.location.pathname);
+    }
+
+    function formatDate(date) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return date.toLocaleDateString("en-US", options);
     }
 
     const auth = getAuth(firebaseApp);
-    console.log(auth.currentUser);
+    // console.log(auth.currentUser);
 
     return (
         <>
@@ -157,6 +167,10 @@ const Food = (props) => {
                             <div className='mt-20 clear-right border-2 border-gray-400 p-4'>
                                 <h1>Submit a review:</h1>
                                 <form onSubmit={e => { handleReviewSubmit(e); }}>
+                                    <div className='bg-background flex'>
+                                        <label className='mr-4'>Rating:*</label>
+                                        <Rating emptySymbol={<Star />} fullSymbol={<Star className='z-10 fill-yellow-300' />} initialRating={reviewRating} onChange={(value) => setReviewRating(value)}></Rating>
+                                    </div>
                                     <label>Review:*</label><br />
                                     <textarea className='w-full' style={{ WebkitBoxSizing: 'border-box', boxSizing: 'border-box' }} name='feedback' type='text' value={reviewFeedback} onChange={(e) => setReviewFeedback(e.target.value)} required></textarea><br />
                                     <label>Title:*</label><br />
@@ -169,15 +183,23 @@ const Food = (props) => {
 
                         {reviewsErr && <strong>Error: {JSON.stringify(reviewsErr)}</strong>}
                         {reviewsLoading && <Loader className='' />}
-                        {reviews &&
+                        {(reviews.length > 0) ?
                             <ul className='px-4 py-8'>
                                 {reviews.map((review) => (
                                     <li key={review.id} className='border p-4'>
+                                        <p className='text-xs float-right mb-1'>{formatDate(review.Created.toDate())}</p>
+                                        <div className='bg-background float-right clear-right flex'>
+                                            <div className='absolute w-[132px] h-[24px]'>
+                                                <div className={`h-full bg-yellow-300`} style={{ width: `${review.Rating ? Math.round(review.Rating / 5 * 100) : 0}%` }}></div>
+                                            </div>
+                                            <Star_template className='z-10' />
+                                        </div>
                                         <h1 className='text-xl'>{review.Title}</h1>
                                         <p>{review.Feedback}</p>
                                     </li>
                                 ))}
                             </ul>
+                            : <p className='text-lg py-16 text-center'>No reviews yet.</p>
                         }
                     </div>
                 </div>
