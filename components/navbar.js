@@ -32,6 +32,7 @@ const Navbar = (props) => {
     useEffect(() => {
         const handleRouteChange = () => {
             setToggleSearch(false);
+            setToggleSlideNav(false);
         };
 
         router.events.on('routeChangeStart', handleRouteChange);

@@ -149,8 +149,6 @@ function MyApp({ Component, pageProps }) {
 
 export default MyApp;
 
-
-    // TODO: navbar: close slide after clicking link
     // IMPLEMENT: mobile navbar: show/hide on scroll
     // IMPLEMENT: second font
     // IMPLEMENT: change currency

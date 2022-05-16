@@ -1,9 +1,14 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from 'react';
 import CartIcon from '../public/images/cart-shopping.svg';
 
 const NavbarMobileMenu = (props) => {
     const [hideCartBtn, setHideCartBtn] = useState(false);
+
+    useEffect(() => {
+        if (props.toggleState === false) setHideCartBtn(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.toggleState]);
 
     const cartBtnVariants = {
         open: {
