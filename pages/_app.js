@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }) {
 
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsNum, setCartItemsNum] = useState();
-  const [cartSubtotal, setCartSubtotal] = useState(0);
+  const [cartSubtotal, setCartSubtotal] = useState(5);
 
   const addToCartHandler = (item) => {
     /* Check if the item is already in the cart. If it is, it will increase the quantity of the item
@@ -110,9 +110,16 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   /* Save cart to local storage */
+  /* Calculate subtotal of all items */
   useEffect(() => {
     setCartItemsNum(cartItems.length);
     if (cartItems) localStorage.setItem('cart_id', JSON.stringify(cartItems));
+
+    let subtotal = 0;
+    cartItems.forEach((item) => {
+      subtotal += item.numInCart * item.Price;
+    });
+    setCartSubtotal(subtotal.toFixed(2));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems]);
 
@@ -124,6 +131,7 @@ function MyApp({ Component, pageProps }) {
           cartState={toggleCart}
           toggleCart={() => setToggleCart(!toggleCart)}
           cartItems={cartItems}
+          cartSubtotal={cartSubtotal}
           removeCartItem={(i) => removeCartItem(i)}
           incNumInCart={(i) => incNumInCart(i)}
           decNumInCart={(i) => decNumInCart(i)} />
