@@ -10,9 +10,7 @@ const searchClient = algoliasearch(
 
 function Hit({ hit }) {
     return (
-        <div>
-            <Link href={`/${hit.path}`}><a>{hit.Name}</a></Link>
-        </div>
+        <Link href={`/${hit.path}`}><a>{hit.Name}</a></Link>
     );
 }
 
@@ -26,7 +24,7 @@ const Search = (props) => {
         >
             <motion.div className="w-3/4 md:w-1/2 mx-auto mt-[10%]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                 <InstantSearch indexName="dev_Foods" searchClient={searchClient}>
-                    <SearchBox classNames={{ form: 'flex', input: 'text-xl py-1 pl-2 rounded-md grow', submit: 'ml-2', submitIcon: 'w-[24px] h-[24px] translate-y-1' }} />
+                    <SearchBox classNames={{ form: 'flex', input: 'text-xl py-1 pl-2 rounded-md grow', submitIcon: 'ml-2 w-[24px] h-[24px] translate-y-1', resetIcon: 'hidden' }} />
                     <Hits hitComponent={Hit} classNames={{ list: 'bg-background2 rounded-md mt-2 p-4', item: 'border-t first:border-none py-2' }} />
                 </InstantSearch>
             </motion.div>
@@ -38,5 +36,4 @@ const Search = (props) => {
 export default Search;
 
 // TODO: search general
-// TODO: close search after
 // TODO: search multiple collections
