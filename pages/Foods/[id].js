@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import firebaseApp from '../../firebase/app';
 import { getFirestore, doc, getDoc, collection, getDocs, addDoc } from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
 import { shimmer, toBase64 } from '../../utils/imageLoad';
 import Loader from '../../public/images/loader.svg';
 import Star_template from '../../public/images/star_template.svg';
@@ -86,6 +87,8 @@ const Food = (props) => {
         });
     }
 
+    const auth = getAuth(firebaseApp);
+    console.log(auth.currentUser);
 
     return (
         <>
