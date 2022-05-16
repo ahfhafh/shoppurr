@@ -96,10 +96,10 @@ const Food = (props) => {
             {loading && <Loader className='absolute top-1/2 bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' />}
             {product && (
                 <div>
-                    <div className='max-w-7xl mx-auto my-16 px-8 md:px-16 flex flex-col md:flex-row gap-8'>
+                    <div className='max-w-7xl mx-auto my-4 md:my-16 px-8 md:px-16 flex flex-col md:flex-row gap-8'>
 
                         <div className='basis-3/5 flex flex-col md:flex-row gap-4 max-h-[500px] shrink-0 items-center'>
-                            <div className='grow w-[500px] md:w-auto h-[500px] relative md:order-last'>
+                            <div className='grow w-full md:w-auto h-[500px] relative md:order-last'>
                                 <Image
                                     src={product.Image}
                                     alt={product.Name}
