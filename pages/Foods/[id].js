@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import firebaseApp from '../../firebase/app';
-import { getFirestore, doc, getDoc, collection, getDocs, addDoc, serverTimestamp, toDate } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, getDocs, addDoc, serverTimestamp, orderBy, query } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 import { shimmer, toBase64 } from '../../utils/imageLoad';
 import Loader from '../../public/images/loader.svg';
@@ -44,7 +44,7 @@ const Food = (props) => {
 
         async function getReviews() {
             setReviewsLoading(true);
-            await getDocs(collection(db, 'Foods', id, 'Reviews')).then((snapshot) => {
+            await getDocs(query(collection(db, 'Foods', id, 'Reviews'), orderBy('Created', 'desc'))).then((snapshot) => {
                 setReviews(snapshot.docs.map((review) => ({ ...review.data(), id: review.id })));
             }).catch((err) => {
                 setReviewsErr(err);
