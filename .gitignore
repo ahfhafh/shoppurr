@@ -33,4 +33,5 @@ yarn-error.log*
 
 /templates
 ui-debug.log
+firebase-debug.log
 shop-purr-firebase-adminsdk-6sjak-4aa01d45cd.json
