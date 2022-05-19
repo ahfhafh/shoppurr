@@ -145,12 +145,11 @@ const Food = (props) => {
                         <div className='flex flex-col gap-1'>
                             <p className='text-4xl'>{product.Name}</p>
                             <Link href='/'><a className='text-md underline'>{product.Brand}</a></Link>
-                            <div className='bg-background flex'>
+                            <div className='bg-background flex' title={product.Rating}>
                                 <div className='absolute w-[132px] h-[24px]'>
                                     <div className={`h-full bg-yellow-300`} style={{ width: `${product.Rating ? Math.round(product.Rating / 5 * 100) : 0}%` }}></div>
                                 </div>
-                                <Star_template className='z-10' />
-                                <p className='ml-2 underline'>{product.Rating}</p>
+                                <Star_template className='z-10 w-[132px] h-[24px]' />
                             </div>
                             <p className='text-2xl mb-4'>${product.Price}</p>
 

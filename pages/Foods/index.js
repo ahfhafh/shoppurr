@@ -7,6 +7,7 @@ import { getFirestore } from "firebase/firestore";
 import { shimmer, toBase64 } from '../../utils/imageLoad';
 import Loader from '../../public/images/loader.svg';
 import food_header from '/public/images/food_header.jpg';
+import Star_template from '../../public/images/star_template.svg';
 
 const Food = () => {
 
@@ -73,6 +74,12 @@ const Food = () => {
                                         </div>
                                         <div className='overflow-hidden text-ellipsis' style={{ 'display': '-webkit-box', 'WebkitLineClamp': 3, 'WebkitBoxOrient': 'vertical' }} title={product.Name}>{product.Name}</div>
                                         <div className=''>${product.Price}</div>
+                                        <div className='bg-background flex' title={product.Rating}>
+                                            <div className='absolute w-[99px] h-[18px]'>
+                                                <div className={`h-full bg-yellow-300`} style={{ width: `${product.Rating ? Math.round(product.Rating / 5 * 100) : 0}%` }}></div>
+                                            </div>
+                                            <Star_template className='z-10  w-[99px] h-[18px]' />
+                                        </div>
                                     </a></Link>
                                 </div>
                             ))}
