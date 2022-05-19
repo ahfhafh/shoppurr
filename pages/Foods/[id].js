@@ -80,16 +80,20 @@ const Food = (props) => {
     const [reviewRating, setReviewRating] = useState(0);
     const [reviewTitle, setReviewTitle] = useState('');
     const [reviewFeedback, setReviewFeedback] = useState('');
+    const [reviewSubmitOnce, setReviewSubmitOnce] = useState(0);
 
     async function handleReviewSubmit(e) {
         e.preventDefault();
-        await addDoc(collection(doc(db, 'Foods', id), 'Reviews'), {
-            Title: reviewTitle,
-            Feedback: reviewFeedback,
-            Rating: reviewRating,
-            Created: serverTimestamp(),
-        });
-        router.reload(window.location.pathname);
+        setReviewSubmitOnce(() => reviewSubmitOnce + 1);
+        if (reviewSubmitOnce === 1) {
+            await addDoc(collection(doc(db, 'Foods', id), 'Reviews'), {
+                Title: reviewTitle,
+                Feedback: reviewFeedback,
+                Rating: reviewRating,
+                Created: serverTimestamp(),
+            });
+            router.reload(window.location.pathname);
+        }
     }
 
     function formatDate(date) {
