@@ -1,19 +1,42 @@
-const functions = require("firebase-functions");
+const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-admin.initializeApp();
+const { initializeApp, applicationDefault } = require('firebase-admin/app');
 
-exports.helloWorld = functions.https.onRequest((req, res) => {
-  functions.logger.info("Hello logs!", { structuredData: true });
-  res.send("Hello from Firebase!");
+initializeApp({
+	credential: applicationDefault(),
+	databaseURL: 'https://shop-purr.firebaseio.com'
 });
 
-// Take the text parameter passed to this HTTP endpoint and insert it into 
-// Firestore under the path /messages/:documentId/original
-exports.addMessage = functions.https.onRequest(async (req, res) => {
-  // Grab the text parameter.
-  const original = req.query.text;
-  // Push the new message into Firestore using the Firebase Admin SDK.
-  const writeResult = await admin.firestore().collection('messages').add({ original: original });
-  // Send back a message that we've successfully written the message
-  res.json({ result: `Message with ID: ${writeResult.id} added.` });
-});
+var db = admin.firestore();
+
+exports.updateFoodRating = functions.firestore
+	.document('Foods/{FoodId}/Reviews/{FeedbackId}')
+	.onWrite((change, context) => {
+		const Food = context.params.FoodId;
+
+		// read all docs of Reviews, get rating, calc avg of ratings
+		let avgRating = 0;
+		let count = 0;
+		var FoodRef = db.doc('Foods/' + Food);
+		var ReviewsRef = FoodRef.collection('Reviews');
+		ReviewsRef.get()
+			.then(snapshot => {
+				snapshot.forEach(doc => {
+					console.log(doc.get('Rating'));
+					avgRating += doc.get('Rating');
+					count++;
+				})
+				avgRating = avgRating / count;
+				if (avgRating) {
+					console.log("avgrating: " + avgRating);
+					return FoodRef.set({ Rating: avgRating.toFixed(2) }, { merge: true });
+				}
+			})
+			.catch(err => {
+				console.log('Error getting documents', err);
+			});
+
+		return null;
+	});
+
+	// TODO: get count of ratings
