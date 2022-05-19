@@ -150,9 +150,11 @@ const Food = (props) => {
                                     <div className={`h-full bg-yellow-300`} style={{ width: `${product.Rating ? Math.round(product.Rating / 5 * 100) : 0}%` }}></div>
                                 </div>
                                 <Star_template className='z-10' />
-                                <p className='ml-2 underline'>placeholder</p>
+                                <p className='ml-2 underline'>{product.Rating}</p>
                             </div>
-                            <p className='text-2xl'>${product.Price}</p>
+                            <p className='text-2xl mb-4'>${product.Price}</p>
+
+                            <p className='text-lg'>{product.Size}</p>
                             <button className='text-lg text-background2 bg-accent px-20 py-2 mt-8' onClick={() => addToCartHandler()}>Add To Cart</button>
 
                             <div className='mt-8'>
