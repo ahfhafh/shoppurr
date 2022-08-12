@@ -81,7 +81,7 @@ const CartMobile = (props) => {
                             : <motion.div key={'CheckoutBtn'} className="mt-4 mb-8 w-full" exit={{ translateY: 150 }}>
                                 <p className="mb-2 pl-4 text-lg float-left">Subtotal:</p>
                                 <p className="pr-4 text-lg font-bold float-right">${props.cartSubtotal}</p>
-                                <Link href='/'>
+                                <Link href='/Checkout'>
                                     <a className="clear-both block bg-accent text-background2 text-center text-xl w-10/12 mx-auto rounded-lg py-3" onClick={() => props.toggleCart()}>Checkout</a>
                                 </Link>
                             </motion.div>
