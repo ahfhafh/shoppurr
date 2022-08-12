@@ -194,10 +194,12 @@ const Food = (props) => {
                                     <li key={review.id} className='border p-4'>
                                         <p className='text-xs float-right mb-1'>{formatDate(review.Created.toDate())}</p>
                                         <div className='bg-background float-right clear-right flex'>
-                                            <div className='absolute w-[132px] h-[24px]'>
-                                                <div className={`h-full bg-yellow-300`} style={{ width: `${review.Rating ? Math.round(review.Rating / 5 * 100) : 0}%` }}></div>
+                                            <div className='bg-background flex' title={review.Title}>
+                                                <div className='absolute w-[132px] h-[24px]'>
+                                                    <div className={`h-full bg-yellow-300`} style={{ width: `${review.Rating ? Math.round(review.Rating / 5 * 100) : 0}%` }}></div>
+                                                </div>
+                                                <Star_template className='z-10 w-[132px] h-[24px]' />
                                             </div>
-                                            <Star_template className='z-10' />
                                         </div>
                                         <h1 className='text-xl'>{review.Title}</h1>
                                         <p>{review.Feedback}</p>
