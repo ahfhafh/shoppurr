@@ -20,7 +20,8 @@
     "react-dom": "18.0.0",
     "react-firebase-hooks": "^5.0.3",
     "react-instantsearch-hooks-web": "^6.24.3",
-    "react-rating": "^2.0.5"
+    "react-rating": "^2.0.5",
+    "react-social-media-embed": "^2.2.2"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.2.1",

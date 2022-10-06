@@ -17,6 +17,7 @@ import main_cat_3 from '/public/images/main-cat-3.jpg';
 import sub_head_2 from '/public/images/sub-head-2.jpg';
 import sub_head_1 from '/public/images/sub-head-1.jpg';
 import sub_head_3 from '/public/images/sub-head-3.jpg';
+import { InstagramEmbed } from 'react-social-media-embed';
 
 export default function Home() {
 
@@ -241,12 +242,12 @@ export default function Home() {
         </video>
 
         {/* INSTAGRAM */}
-        <div className='flex justify-center gap-4 overflow-x-scroll'>
-          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
-          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
-          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
-          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
-          <div className='text-center h-52 w-52 flex-none border border-black'>INSTAGRAM</div>
+        <div className='flex gap-8 overflow-x-scroll snap-x p-4'>
+          <InstagramEmbed className='snap-center' style={{ maxWidth: 328, overflow: 'visible', 'overflow-y': 'clip' }} url="https://www.instagram.com/p/CjWQT-vP6CD/" width='100%' />
+          <InstagramEmbed className='snap-center' style={{ maxWidth: 328, overflow: 'visible', 'overflow-y': 'clip' }} url="https://www.instagram.com/p/CjVpZ7DOyTk/" width='100%' />
+          <InstagramEmbed className='snap-center' style={{ maxWidth: 328, overflow: 'visible', 'overflow-y': 'clip' }} url="https://www.instagram.com/p/CjT8GZNJke3/" width='100%' />
+          <InstagramEmbed className='snap-center' style={{ maxWidth: 328, overflow: 'visible', 'overflow-y': 'clip' }} url="https://www.instagram.com/p/CjTEHaStLb6/" width='100%' />
+          <InstagramEmbed className='snap-center' style={{ maxWidth: 328, overflow: 'visible', 'overflow-y': 'clip' }} url="https://www.instagram.com/p/CjSrcvchvog/" width='100%' />
         </div>
       </main >
     </div >
