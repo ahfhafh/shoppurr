@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from "react";
 import Navbar from '../components/navbar';
 import Cart from '../components/cart';
 import Footer from '../components/footer';
+import { Analytics } from '@vercel/analytics/react';
 config.autoAddCss = false;
 
 const MOBILE_WINDOW = 768;
@@ -142,6 +143,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} addToCart={(item) => addToCartHandler(item)} toggleCart={() => setToggleCart(true)} />
       </div>
       <Footer />
+      <Analytics />
     </>
 
   );
